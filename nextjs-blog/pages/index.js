@@ -11,10 +11,10 @@ export default function Home() {
           <Image src="/logo.png" alt="Baby Bumps Logo" width={150} height={50} />
         </div>
         <nav className={styles.navbar}>
-          <Link legacyBehavior href="/about"><a>About Us</a></Link>
-          <Link legacyBehavior href="/surrogates"><a>Find a Surrogate</a></Link>
-          <Link legacyBehavior href="/parents"><a>Become a Parent</a></Link>
-          <Link legacyBehavior href="/contact"><a>Contact</a></Link>
+          <Link href="/about">About Us</Link>
+          <Link href="/surrogates">Find a Surrogate</Link>
+          <Link href="/forum">Forum</Link>
+          <Link href="/contact">Contact</Link>
         </nav>
       </header>
 
@@ -23,7 +23,7 @@ export default function Home() {
         <div className={styles.heroTextContainer}>
           <h1 className={styles.heroTitle}>Building Families, One Miracle at a Time</h1>
           <p className={styles.heroSubtitle}>Connecting intended parents with surrogates to make dreams come true.</p>
-          <Link legacyBehavior href="/get-started"><a className={styles.heroButton}>Get Started</a></Link>
+          <Link className={styles.heroButton} href="/get-started">Get Started</Link>
         </div>
         <div className={styles.heroImageContainer}>
           <Image src="/hero-image.jpg" alt="Happy family" layout="fill" objectFit="cover" />
@@ -64,15 +64,15 @@ export default function Home() {
       {/* Call to Action Section */}
       <section className={styles.ctaSection}>
         <h2>Ready to Start Your Journey?</h2>
-        <Link legacyBehavior href="/contact"><a className={styles.ctaButton}>Contact Us Today</a></Link>
+        <Link  href="/contact">Contact Us Today</Link>
       </section>
 
       {/* Footer Section */}
       <footer className={styles.footer}>
         <div className={styles.footerLinks}>
-          <Link legacyBehavior href="/privacy-policy"><a>Privacy Policy</a></Link>
-          <Link legacyBehavior href="/terms"><a>Terms of Service</a></Link>
-          <Link legacyBehavior href="/contact"><a>Contact</a></Link>
+          <Link  href="/privacy-policy">Privacy Policy</Link>
+          <Link  href="/terms">Terms of Service</Link>
+          <Link  href="/contact">Contact</Link>
         </div>
         <p>Baby Bumps © 2024. All rights reserved.</p>
       </footer>

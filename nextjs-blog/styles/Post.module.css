@@ -1,0 +1,78 @@
+/* CSS Styling: Post.module.css */
+
+.postCard {
+    background-color: #FFFFFF;
+    padding: 40px;
+    border: 1px solid #DDD;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .postHeader {
+    display:block;
+    justify-content: flex-start;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0px;
+  }
+  
+  .postUser {
+    font-weight: bold;
+    color: #333;
+    font-size: 1.8rem;
+  }
+  
+  .postContent {
+    color: #555;
+    font-size: 1.4rem;
+  }
+  
+  .replySection {
+    margin-top: 10px;
+  }
+  
+  .replyCard {
+    background-color: #F9F9F9;
+    padding: 20px;
+    /* margin-top: 20px; */
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .replyUser {
+    font-weight: bold;
+    color: #333;
+    font-size: 1.4rem;
+  }
+  
+  .replyContent {
+    color: #555;
+    font-size: 1.3rem;
+  }
+  
+  .replyInput {
+    width: 95%;
+    padding: 15px;
+    border-radius: 5px;
+    border: 1px solid #DDD;
+    font-size: 1.2rem;
+  }
+  
+  .replyButton {
+    background-color: #FF6F61;
+    color: white;
+    padding: 15px 30px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    font-size: 1.4rem;
+  }
+  
+  .replyButton:hover {
+    background-color: #FF4F41;
+  }
+  
