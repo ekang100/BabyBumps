@@ -1,7 +1,6 @@
-// InfoCard.js
 import React from 'react';
 
-const InfoCard = ({ title, description, items = [] }) => {
+const InfoCard = ({ title, description, items = [], openPopup }) => {
   return (
     <div style={styles.card}>
       <div style={styles.titleSection}>
@@ -16,6 +15,20 @@ const InfoCard = ({ title, description, items = [] }) => {
           ))}
         </ul>
       )}
+      <button 
+        onClick={openPopup} 
+        style={{
+          marginTop: '10px',
+          // padding: '5px 10px',
+          backgroundColor: '#ff5a5f',
+          color: 'white',
+          border: 'none',
+          // borderRadius: '5px',
+          cursor: 'pointer',
+        }}
+      >
+        Click to Edit
+      </button>
     </div>
   );
 };
