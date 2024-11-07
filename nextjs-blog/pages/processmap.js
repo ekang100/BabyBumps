@@ -1,7 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import InfoCard from '../components/InfoCard';
 import Image from 'next/image';
 import Link from 'next/link';
+import styles from '../styles/Home.module.css';
 
 const stages = [
   {
@@ -48,27 +49,6 @@ const stages = [
 ];
 
 const ProcessMap = () => {
-  const [popupContent, setPopupContent] = useState(null);
-  const [inputText, setInputText] = useState(''); 
-
-  const openPopup = (content) => {
-    setPopupContent(content);
-  };
-
-  const closePopup = () => {
-    setPopupContent(null);
-    setInputText(''); 
-  };
-
-  const handleInputChange = (event) => {
-    setInputText(event.target.value);
-  };
-
-  const handleSubmit = () => {
-    alert(`Submitted: ${inputText}`); // Just for testing, alert the text
-    setInputText(''); 
-  };
-
   return (
     <div style={{
       display: 'flex',
@@ -81,25 +61,18 @@ const ProcessMap = () => {
     }}>
       
       {/* Header Section */}
-      <header style={{
-        width: '100%',
-        padding: '20px',
-        backgroundColor: '#ffffff',
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        position: 'fixed',
-        top: 0,
-        left: 0,
-        right: 0,
-        zIndex: 10,
-        boxSizing: 'border-box',
+      <header className={styles.header} style={{
+        width: '100%', // Ensures the navbar spans the entire page
+        backgroundColor: '#fff',
+        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
+        padding: '10px 0',
       }}>
-        <div style={{ flex: 1 }}>
+        <div className={styles.logoContainer} style={{ display: 'flex', alignItems: 'center', paddingLeft: '20px' }}>
           <Image src="/logo.png" alt="Baby Bumps Logo" width={150} height={50} />
         </div>
-        <nav style={{
+        <nav className={styles.navbar} style={{
           display: 'flex',
+          justifyContent: 'center',
           gap: '20px',
         }}>
           <Link href="/about">About Us</Link>
@@ -109,9 +82,9 @@ const ProcessMap = () => {
           <Link href="/processmap">Process Map</Link>
         </nav>
       </header>
-
-      <h1 style={{ textAlign: 'center', marginTop: '100px' }}>Process Map</h1> 
-
+      
+      <h1 style={{ textAlign: 'center' }}>Process Map</h1>
+      
       <div style={{
         display: 'flex',
         flexDirection: 'column',
@@ -130,7 +103,7 @@ const ProcessMap = () => {
           transform: 'translateX(-50%)',
           zIndex: 0,
         }}></div>
-
+        
         {stages.map((stage, index) => (
           <div key={index} style={{
             display: 'flex',
@@ -149,11 +122,7 @@ const ProcessMap = () => {
               visibility: stage.left ? 'visible' : 'hidden',
               zIndex: 2,
             }}>
-              {stage.left && 
-                <div>
-                  <InfoCard title={stage.left.title} items={stage.left.items} />
-                  <button onClick={() => openPopup({ title: stage.left.title, items: stage.left.items })}>Click To Edit!</button>
-                </div>}
+              {stage.left && <InfoCard title={stage.left.title} items={stage.left.items} />}
             </div>
 
             <div style={{
@@ -163,18 +132,28 @@ const ProcessMap = () => {
               width: '80px',
               zIndex: 3,
               textAlign: 'center',
-              marginTop: '10px',
+              marginLeft: '20px', // Prevents overlap with the timeline
             }}>
               <span style={{
                 color: '#ea5b5b',
                 fontWeight: 'bold',
                 fontSize: '0.9rem',
+                backgroundColor: '#faf5e6',
+                padding: '2px 8px',
+                borderRadius: '8px',
+                marginBottom: '10px', // Space for line breaks
               }}>{stage.step}</span>
+              <div style={{
+                width: '4px',
+                height: '40px',
+                backgroundColor: '#ea5b5b',
+              }}></div> {/* Adds breaks in the timeline */}
             </div>
 
             <div style={{
               flex: 1,
               display: 'flex',
+              flexDirection: Array.isArray(stage.right) ? 'column' : 'row',
               gap: '10px',
               paddingLeft: '20px',
               justifyContent: 'flex-start',
@@ -184,82 +163,16 @@ const ProcessMap = () => {
             }}>
               {Array.isArray(stage.right)
                 ? stage.right.map((item, i) => (
-                    <div key={i}>
-                      <InfoCard title={item.title} items={item.items} />
-                      <button onClick={() => openPopup({ title: item.title, items: item.items })}>Click To Edit!</button>
-                    </div>
+                    <InfoCard key={i} title={item.title} items={item.items} />
                   ))
-                : stage.right && 
-                  <div>
-                    <InfoCard title={stage.right.title} items={stage.right.items} />
-                    <button onClick={() => openPopup({ title: stage.right.title, items: stage.right.items })}>Click To Edit!</button>
-                  </div>}
+                : stage.right && <InfoCard title={stage.right.title} items={stage.right.items} />}
             </div>
           </div>
         ))}
       </div>
-
-      {popupContent && (
-        <div style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          bottom: 0,
-          backgroundColor: 'rgba(0, 0, 0, 0.7)',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          zIndex: 20,
-        }} onClick={closePopup}>
-          <div onClick={(e) => e.stopPropagation()} style={{
-            backgroundColor: 'white',
-            padding: '20px',
-            maxWidth: '500px',
-            width: '100%',
-            borderRadius: '8px',
-            boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
-            position: 'relative',
-          }}>
-            <button onClick={closePopup} style={{
-              position: 'absolute',
-              top: '10px',
-              right: '10px',
-              padding: '5px 10px',
-              backgroundColor: '#ea5b5b',
-              color: 'white',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-            }}>Close</button>
-            <h2>{popupContent.title}</h2>
-            <textarea
-              value={inputText}
-              onChange={handleInputChange}
-              rows={4}
-              style={{
-                width: '100%',
-                padding: '10px',
-                borderRadius: '5px',
-                border: '1px solid #ccc',
-                marginBottom: '10px',
-              }}
-            />
-            <button onClick={handleSubmit} style={{
-              padding: '8px 15px',
-              backgroundColor: '#ea5b5b',
-              color: 'white',
-              border: 'none',
-              borderRadius: '5px',
-              cursor: 'pointer',
-            }}>
-              Submit
-            </button>
-          </div>
-        </div>
-      )}
     </div>
   );
 };
 
 export default ProcessMap;
+
