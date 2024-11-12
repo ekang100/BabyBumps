@@ -3,13 +3,34 @@ import styles from "../styles/Layout.module.css";
 
 export default function Footer({ fixed }) {
   return (
-    <footer className={fixed ? styles.footerFixed : styles.footerScrollable}>
-      <div className={styles.footerLinks}>
-        <Link href="/privacy-policy">Privacy Policy</Link>
-        <Link href="/terms">Terms of Service</Link>
-        <Link href="/contact">Contact</Link>
+    <footer className={`${styles.footerCommon} ${fixed ? styles.footerFixed : styles.footerScrollable}`}>
+      <img
+        className={styles.logoImage}
+        src="logo_white.svg" // Update with the correct path to your SVG
+        alt="Logo"
+      />
+      <div className={styles.linksContainer}>
+        <div className={styles.linkGroup}>
+          <Link href="/privacy-policy">
+            <div className={styles.linkItem}>
+              <div className={styles.linkText}>Privacy Policy</div>
+            </div>
+          </Link>
+          <Link href="/terms">
+            <div className={styles.linkItem}>
+              <div className={styles.linkText}>Terms of Service</div>
+            </div>
+          </Link>
+          <Link href="/contact">
+            <div className={styles.linkItem}>
+              <div className={styles.linkText}>Contact</div>
+            </div>
+          </Link>
+        </div>
+        <div className={styles.copyright}>
+          © 2024 BabyBumps. All rights reserved.
+        </div>
       </div>
-      <p>Baby Bumps © 2024. All rights reserved.</p>
     </footer>
   );
 }
