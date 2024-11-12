@@ -5,25 +5,6 @@ import styles from "../styles/Home.module.css";
 export default function Home() {
   return (
     <div className={styles.container}>
-      {/* Header Section */}
-      <header className={styles.header}>
-        <div className={styles.logoContainer}>
-          <Image
-            src="/logo.png"
-            alt="Baby Bumps Logo"
-            width={150}
-            height={50}
-          />
-        </div>
-        <nav className={styles.navbar}>
-          <Link href="/about">About Us</Link>
-          <Link href="/surrogates">Find a Surrogate</Link>
-          <Link href="/forum">Forum</Link>
-          <Link href="/vendors">Vendors</Link>
-          <Link href="/contact">Contact</Link>
-        </nav>
-      </header>
-
       {/* Hero Section */}
       <section className={styles.heroSection}>
         <div className={styles.heroTextContainer}>
@@ -107,16 +88,6 @@ export default function Home() {
         <h2>Ready to Start Your Journey?</h2>
         <Link href="/contact">Contact Us Today</Link>
       </section>
-
-      {/* Footer Section */}
-      <footer className={styles.footer}>
-        <div className={styles.footerLinks}>
-          <Link href="/privacy-policy">Privacy Policy</Link>
-          <Link href="/terms">Terms of Service</Link>
-          <Link href="/contact">Contact</Link>
-        </div>
-        <p>Baby Bumps © 2024. All rights reserved.</p>
-      </footer>
     </div>
   );
 }

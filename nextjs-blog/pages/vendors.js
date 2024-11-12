@@ -42,21 +42,6 @@ export default function Vendors() {
 
   return (
     <div className={styles.container}>
-      <header className={styles.header}>
-        <div className={styles.logoContainer}>
-          <Link legacyBehavior href="/">
-            <a className={styles.logo}>Baby Bumps</a>
-          </Link>
-        </div>
-        <nav className={styles.navbar}>
-          <Link href="/about">About Us</Link>
-          <Link href="/surrogates">Find a Surrogate</Link>
-          <Link href="/forum">Forum</Link>
-          <Link href="/vendors">Vendors</Link>
-          <Link href="/contact">Contact</Link>
-        </nav>
-      </header>
-
       <main className={styles.main}>
         <h1 className={styles.title}>Trusted Vendors</h1>
         <p className={styles.description}>
@@ -80,15 +65,6 @@ export default function Vendors() {
           ))}
         </div>
       </main>
-
-      <footer className={styles.footer}>
-        <div className={styles.footerLinks}>
-          <Link href="/privacy-policy">Privacy Policy</Link>
-          <Link href="/terms">Terms of Service</Link>
-          <Link href="/contact">Contact</Link>
-        </div>
-        <p>Baby Bumps © 2024. All rights reserved.</p>
-      </footer>
     </div>
   );
 }
