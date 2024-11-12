@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "../styles/Vendors.module.css"; // Assuming you want to use the same styles
+import styles from "../styles/Layout.module.css"; 
 
 export default function Header() {
   return (

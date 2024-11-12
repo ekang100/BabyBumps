@@ -1,9 +1,9 @@
 import Link from "next/link";
-import styles from "../styles/Vendors.module.css"; // Assuming you want to use the same styles
+import styles from "../styles/Layout.module.css";
 
-export default function Footer() {
+export default function Footer({ fixed }) {
   return (
-    <footer className={styles.footer}>
+    <footer className={fixed ? styles.footerFixed : styles.footerScrollable}>
       <div className={styles.footerLinks}>
         <Link href="/privacy-policy">Privacy Policy</Link>
         <Link href="/terms">Terms of Service</Link>
