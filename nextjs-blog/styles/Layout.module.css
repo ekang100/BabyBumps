@@ -5,13 +5,55 @@
 }
 
 .header {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  background-color: #ffffff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1000;
-}
+    width: 100%;
+    height: 64px; /* Set the height to 64 pixels */
+    position: fixed; /* Fix the position at the top */
+    top: 0; /* Align it to the top of the viewport */
+    background: #FFFEF5;
+    border-bottom: 1px solid black;
+    justify-content: space-between;
+    align-items: center;
+    display: flex;
+    z-index: 1000; /* Ensure it stays above other content */
+    padding-left: 156px;
+    padding-right: 156px;
+  }
+  
+  .header .leftContainer {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 48px;
+    display: flex;
+  }
+  
+  .header .logoImage {
+    height: 31px;
+  }
+  
+  .header .navbar {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 24px;
+    display: flex;
+  }
+  
+  .header .navItem {
+    padding-bottom: 3px;
+    border-bottom: 1px solid black;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    display: flex;
+  }
+  
+  .header .navText {
+    text-align: center;
+    color: black;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    word-wrap: break-word;
+  }
 
 .main {
   flex: 1;
