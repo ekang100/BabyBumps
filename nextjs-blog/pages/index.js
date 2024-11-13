@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 
-export default function Home() {
+function Home() {
   return (
     <div className={styles.container}>
       {/* Hero Section */}
@@ -91,3 +91,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;
