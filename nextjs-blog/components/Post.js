@@ -2,7 +2,7 @@
 
 import styles from '../styles/Post.module.css';
 
-export default function Post({ post, replyContent, setReplyContent, handleReplySubmit }) {
+function Post({ post, replyContent, setReplyContent, handleReplySubmit }) {
   return (
     <div className={styles.postCard}>
       <div className={styles.postHeader}>
@@ -27,3 +27,5 @@ export default function Post({ post, replyContent, setReplyContent, handleReplyS
     </div>
   );
 }
+
+export default Post;

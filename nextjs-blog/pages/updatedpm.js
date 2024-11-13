@@ -37,31 +37,6 @@ function UpdatedPM() {
 
   return (
     <div>
-      {/* Header Section */}
-      <header style={{
-        width: '100%', 
-        backgroundColor: '#fff',
-        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-        padding: '10px 0',
-      }}>
-        <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '20px' }}>
-          <Image src="/logo.png" alt="Baby Bumps Logo" width={150} height={50} />
-        </div>
-        <nav style={{
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '20px',
-          padding: '10px 0'
-        }}>
-          <Link href="/about">About Us</Link>
-          <Link href="/surrogates">Find a Surrogate</Link>
-          <Link href="/forum">Forum</Link>
-          <Link href="/contact">Contact</Link>
-          <Link href="/processmap">Process Map</Link>
-          <Link href="/updatedpm">To Do!</Link>
-        </nav>
-      </header>
-      
       <h1 style={{ textAlign: 'center' }}>Your To-Dos</h1>
       <div style={{ display: 'flex', gap: '20px', padding: '20px' }}>
         {stages.map(stage => (

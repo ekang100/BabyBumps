@@ -1,9 +1,8 @@
 import { useState } from "react";
-import Link from "next/link";
 import styles from "../styles/Forum.module.css";
 import Post from "../components/Post";
 
-export default function Forum() {
+function Forum() {
   const [posts, setPosts] = useState([
     {
       id: 1,
@@ -65,7 +64,7 @@ export default function Forum() {
   );
 
   return (
-    <div className={styles.container}>
+    <div>
       {/* Forum Section */}
       <main className={styles.forumSection}>
         <h1 className={styles.forumTitle}>Community Forum</h1>
@@ -104,3 +103,7 @@ export default function Forum() {
     </div>
   );
 }
+
+Forum.fixedFooter = true;
+
+export default Forum;

@@ -1,6 +1,6 @@
 import '../styles/global.css';
-import Header from '../components/Header';
-import Footer from '../components/Footer';
+import Header from '../components/Header/Header';
+import Footer from '../components/Footer/Footer';
 import styles from '../styles/Layout.module.css';
 
 function MyApp({ Component, pageProps }) {
@@ -10,7 +10,13 @@ function MyApp({ Component, pageProps }) {
   return (
     <div className={styles.container}>
       <Header />
-      <main className={styles.main}>
+      <main
+        className={styles.main}
+        style={{
+          paddingTop: '64px',
+          paddingBottom: fixedFooter ? '127px' : '0',
+        }}
+      >
         <Component {...pageProps} />
       </main>
       <Footer fixed={fixedFooter} />
