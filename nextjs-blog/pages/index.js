@@ -5,6 +5,20 @@ import styles from "../styles/Home.module.css";
 function Home() {
   return (
     <div className={styles.container}>
+      {/* Header Section */}
+      <header className={styles.header}>
+        <div className={styles.logoContainer}>
+          <Image src="/logo.png" alt="Baby Bumps Logo" width={150} height={50} />
+        </div>
+        <nav className={styles.navbar}>
+          <Link href="/about">About Us</Link>
+          <Link href="/surrogates">Find a Surrogate</Link>
+          <Link href="/forum">Forum</Link>
+          <Link href="/contact">Contact</Link>
+          <Link href="/processmap">Process Map</Link>
+          <Link href="/updatedpm">To Do!</Link>
+        </nav>
+      </header>
       {/* Hero Section */}
       <section className={styles.heroSection}>
         <div className={styles.heroTextContainer}>
