@@ -1,6 +1,4 @@
 import React, { useState } from 'react';
-import Image from 'next/image'; 
-import Link from 'next/link'; 
 
 const stages = ['To Do', 'In Progress', 'Blocked', 'Done'];
 
@@ -38,7 +36,7 @@ function UpdatedPM() {
   return (
     <div>
       <h1 style={{ textAlign: 'center' }}>Your To-Dos</h1>
-      <div style={{ display: 'flex', gap: '20px', padding: '20px' }}>
+      <div style={{ display: 'flex', gap: '20px'}}>
         {stages.map(stage => (
           <div
             key={stage}

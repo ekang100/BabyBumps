@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import styles from "../styles/Vendors.module.css";
 
 function Vendors() {
@@ -13,7 +13,7 @@ function Vendors() {
         phone: "(555) 123-4567",
         email: "info@fcwest.com",
       },
-      starred: false, // Initial state for starred
+      starred: false,
     },
     {
       id: 2,
@@ -42,6 +42,19 @@ function Vendors() {
     },
   ]);
 
+  useEffect(() => {
+    // Load vendors from local storage on client side
+    const savedVendors = localStorage.getItem("vendors");
+    if (savedVendors) {
+      setVendors(JSON.parse(savedVendors));
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save vendors to local storage whenever they change
+    localStorage.setItem("vendors", JSON.stringify(vendors));
+  }, [vendors]);
+
   const toggleStar = (id) => {
     setVendors((prevVendors) =>
       prevVendors.map((vendor) =>
@@ -50,8 +63,10 @@ function Vendors() {
     );
   };
 
+  console.log(vendors);
+
   return (
-    <div>
+    <div className={styles.container}>
       <main className={styles.main}>
         <h1 className={styles.title}>Trusted Vendors</h1>
         <p className={styles.description}>
@@ -73,7 +88,7 @@ function Vendors() {
               </div>
               <button
                 onClick={() => toggleStar(vendor.id)}
-                className={styles.starButton}
+                className={`${styles.starButton} ${vendor.starred ? styles.active : ''}`}
               >
                 {vendor.starred ? "Unstar" : "Star"}
               </button>
