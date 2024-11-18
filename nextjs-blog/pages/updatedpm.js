@@ -1,35 +1,44 @@
 import React, { useState } from 'react';
-import Image from 'next/image'; 
-import Link from 'next/link'; 
+import Image from 'next/image';
+import Link from 'next/link';
 
-const stages = ['To Do', 'In Progress', 'Blocked', 'Done'];
+const stages = ['Stage 1: Contact Surrogate', 'Stage 2: Hospital Meetings']; // Main stages
+const categories = ['To Do', 'In Progress', 'Blocked', 'Done']; // Subcategories
 
 function UpdatedPM() {
   const [tasks, setTasks] = useState({
-    'To Do': ['Task 1', 'Task 2'],
-    'In Progress': ['Task 3'],
-    'Blocked': ['Task 4'],
-    'Done': ['Task 5']
+    'Stage 1: Contact Surrogate': {
+      'To Do': ['Task 1', 'Task 2'],
+      'In Progress': ['Task 3'],
+      'Blocked': ['Task 4'],
+      'Done': ['Task 5']
+    },
+    'Stage 2: Hospital Meetings': {
+    'To Do': ['Task A', 'Task B'],
+    'In Progress': ['Task C'],
+    'Blocked': ['Task D'],
+    'Done': ['Task E']
+    }
   });
 
-  // Handle drag start
-  const handleDragStart = (event, taskName, stage) => {
+  const handleDragStart = (event, taskName, stage, category) => {
     event.dataTransfer.setData('taskName', taskName);
     event.dataTransfer.setData('sourceStage', stage);
+    event.dataTransfer.setData('sourceCategory', category);
   };
 
-  // Handle drop
-  const handleDrop = (event, targetStage) => {
+  const handleDrop = (event, targetStage, targetCategory) => {
     const taskName = event.dataTransfer.getData('taskName');
     const sourceStage = event.dataTransfer.getData('sourceStage');
+    const sourceCategory = event.dataTransfer.getData('sourceCategory');
 
-    if (sourceStage !== targetStage) {
+    if (sourceStage !== targetStage || sourceCategory !== targetCategory) {
       setTasks(prevTasks => {
         const newTasks = { ...prevTasks };
-        // Remove the task from the source stage
-        newTasks[sourceStage] = newTasks[sourceStage].filter(task => task !== taskName);
-        // Add the task to the target stage
-        newTasks[targetStage] = [...newTasks[targetStage], taskName];
+        // Remove task from source
+        newTasks[sourceStage][sourceCategory] = newTasks[sourceStage][sourceCategory].filter(task => task !== taskName);
+        // Add task to target
+        newTasks[targetStage][targetCategory] = [...newTasks[targetStage][targetCategory], taskName];
         return newTasks;
       });
     }
@@ -63,37 +72,43 @@ function UpdatedPM() {
       </header>
       
       <h1 style={{ textAlign: 'center' }}>Your To-Dos</h1>
-      <div style={{ display: 'flex', gap: '20px', padding: '20px' }}>
-        {stages.map(stage => (
-          <div
-            key={stage}
-            style={{ flex: 1, border: '1px solid #ddd', padding: '10px', borderRadius: '5px' }}
-            onDragOver={(event) => event.preventDefault()}
-            onDrop={(event) => handleDrop(event, stage)}
-          >
-            <h3 style={{ textAlign: 'center' }}>{stage}</h3>
-            <div style={{ minHeight: '100px', padding: '10px', backgroundColor: '#f9f9f9' }}>
-              {tasks[stage].map(task => (
-                <div
-                  key={task}
-                  draggable
-                  onDragStart={(event) => handleDragStart(event, task, stage)}
-                  style={{
-                    padding: '8px',
-                    marginBottom: '10px',
-                    backgroundColor: '#d1ecf1',
-                    border: '1px solid #bee5eb',
-                    borderRadius: '5px',
-                    cursor: 'move'
-                  }}
-                >
-                  {task}
+
+      {stages.map(stage => (
+        <div key={stage} style={{ marginBottom: '20px' }}>
+          <h2 style={{ textAlign: 'center' }}>{stage}</h2>
+          <div style={{ display: 'flex', gap: '20px', padding: '20px' }}>
+            {categories.map(category => (
+              <div
+                key={category}
+                style={{ flex: 1, border: '1px solid #ddd', padding: '10px', borderRadius: '5px' }}
+                onDragOver={(event) => event.preventDefault()}
+                onDrop={(event) => handleDrop(event, stage, category)}
+              >
+                <h3 style={{ textAlign: 'center' }}>{category}</h3>
+                <div style={{ minHeight: '100px', padding: '10px', backgroundColor: '#f9f9f9' }}>
+                  {tasks[stage][category].map(task => (
+                    <div
+                      key={task}
+                      draggable
+                      onDragStart={(event) => handleDragStart(event, task, stage, category)}
+                      style={{
+                        padding: '8px',
+                        marginBottom: '10px',
+                        backgroundColor: '#d1ecf1',
+                        border: '1px solid #bee5eb',
+                        borderRadius: '5px',
+                        cursor: 'move'
+                      }}
+                    >
+                      {task}
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 }
