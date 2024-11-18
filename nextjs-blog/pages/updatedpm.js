@@ -56,7 +56,7 @@ function UpdatedPM() {
         <div style={{ display: 'flex', alignItems: 'center', paddingLeft: '20px' }}>
           <Image src="/logo.png" alt="Baby Bumps Logo" width={150} height={50} />
         </div>
-        <nav style={{
+        {/* <nav style={{
           display: 'flex',
           justifyContent: 'center',
           gap: '20px',
@@ -68,7 +68,7 @@ function UpdatedPM() {
           <Link href="/contact">Contact</Link>
           <Link href="/processmap">Process Map</Link>
           <Link href="/updatedpm">To Do!</Link>
-        </nav>
+        </nav> */}
       </header>
       
       <h1 style={{ textAlign: 'center' }}>Your To-Dos</h1>

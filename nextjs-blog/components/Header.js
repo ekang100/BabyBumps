@@ -36,6 +36,11 @@ export default function Header() {
               <div className={styles.navText}>CONTACT</div>
             </div>
           </Link>
+          <Link href="/updatedpm">
+            <div className={styles.navItem}>
+              <div className={styles.navText}>YOUR TO-DOs</div>
+            </div>
+          </Link>
         </nav>
       </div>
       <div className={styles.navItem}>
