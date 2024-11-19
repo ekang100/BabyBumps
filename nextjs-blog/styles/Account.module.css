@@ -1,0 +1,94 @@
+.container {
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: #f9f9f9;
+  display: flex;
+  justify-content: center;
+}
+
+.accountCard {
+  background: white;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 800px;
+}
+
+.accountCard h1 {
+  color: #333;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.userProfile,
+.userNotes {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 10px;
+}
+
+.userProfile h2,
+.userNotes h2 {
+  color: #444;
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+}
+
+.profileDetails p {
+  margin: 0.5rem 0;
+  color: #666;
+  font-size: 1.1rem;
+}
+
+.profileDetails strong {
+  color: #333;
+}
+
+.userNotes ul {
+  list-style: none;
+  padding: 0;
+}
+
+.userNotes li {
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
+  color: #666;
+}
+
+.userNotes li:last-child {
+  border-bottom: none;
+}
+
+.logoutButton {
+  background: #e65d71;
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+  margin-top: 1rem;
+}
+
+.logoutButton:hover {
+  background: #d54c60;
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
+
+  .accountCard {
+    padding: 1rem;
+  }
+
+  .userProfile,
+  .userNotes {
+    padding: 1rem;
+  }
+}

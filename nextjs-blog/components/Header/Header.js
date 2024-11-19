@@ -1,15 +1,40 @@
+import { useState, useEffect } from "react";
 import NavItem from "./NavItem";
 import styles from "../../styles/Layout.module.css";
+import { getCurrentUser } from "../../utils/userUtils";
 
 function Header() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const user = getCurrentUser();
+    setIsAuthenticated(!!user);
+    setIsLoading(false);
+  }, []);
+
+  if (isLoading) {
+    return (
+      <header className={styles.header}>
+        <div className={styles.leftContainer}>
+          <img className={styles.logoImage} src="Logo.svg" alt="Logo" />
+          <nav className={styles.navbar}>
+            <NavItem href="/" text="ABOUT US" />
+            <NavItem href="/processmap" text="PROCESS MAP" />
+            <NavItem href="/forum" text="FORUM" />
+            <NavItem href="/vendors" text="VENDORS" />
+            <NavItem href="/updatedpm" text="WORKFLOW" />
+          </nav>
+        </div>
+        <NavItem href="/login" text="LOGIN" />
+      </header>
+    );
+  }
+
   return (
     <header className={styles.header}>
       <div className={styles.leftContainer}>
-        <img
-          className={styles.logoImage}
-          src="Logo.svg" 
-          alt="Logo"
-        />
+        <img className={styles.logoImage} src="Logo.svg" alt="Logo" />
         <nav className={styles.navbar}>
           <NavItem href="/" text="ABOUT US" />
           <NavItem href="/processmap" text="PROCESS MAP" />
@@ -18,7 +43,10 @@ function Header() {
           <NavItem href="/updatedpm" text="WORKFLOW" />
         </nav>
       </div>
-      <NavItem href="/account" text="ACCOUNT" />
+      <NavItem
+        href={isAuthenticated ? "/account" : "/login"}
+        text={isAuthenticated ? "ACCOUNT" : "LOGIN"}
+      />
     </header>
   );
 }

@@ -1,60 +1,88 @@
 class User {
-    constructor(username, password) {
-      this.username = username;
-      this.password = password;
+  constructor(username, password, id, name, email) {
+    this.username = username;
+    this.password = password;
+    this.id = id;
+    this.name = name;
+    this.email = email;
+    this.notes = [];
+  }
+}
+
+// Predefined list of users for testing purposes
+const predefinedUsers = [
+  new User("testUser1", "password123", 1, "Test User", "test1@example.com"),
+  new User("demoUser2", "securePassword", 2, "Demo User", "demo2@example.com"),
+  new User(
+    "AndrewDawson",
+    "password",
+    3,
+    "Andrew Dawson",
+    "andrew@example.com"
+  ),
+];
+
+export const login = (username, password) => {
+  if (typeof window === "undefined") return false;
+
+  const user = predefinedUsers.find(
+    (u) => u.username === username && u.password === password
+  );
+
+  if (user) {
+    const { password: _, ...userWithoutPassword } = user;
+    localStorage.setItem("currentUser", JSON.stringify(userWithoutPassword));
+    return true;
+  }
+  return false;
+};
+
+export const logout = () => {
+  if (typeof window !== "undefined") {
+    localStorage.removeItem("currentUser");
+  }
+};
+
+export const getCurrentUser = () => {
+  if (typeof window !== "undefined") {
+    const userStr = localStorage.getItem("currentUser");
+    return userStr ? JSON.parse(userStr) : null;
+  }
+  return null;
+};
+
+export const updateUserNotes = (notes) => {
+  const currentUser = getCurrentUser();
+  if (currentUser) {
+    // Update the notes in both localStorage and predefinedUsers array
+    const updatedUser = {
+      ...currentUser,
+      notes: notes,
+    };
+    localStorage.setItem("currentUser", JSON.stringify(updatedUser));
+
+    // Update the user's notes in predefinedUsers
+    const userIndex = predefinedUsers.findIndex((u) => u.id === currentUser.id);
+    if (userIndex !== -1) {
+      predefinedUsers[userIndex].notes = notes;
     }
   }
-  
-  // Predefined list of users for testing purposes
-  const predefinedUsers = [
-    new User("testUser1", "password123"),
-    new User("demoUser2", "securePassword"),
-    new User("AndrewDawson", "password")
-  ];
-  
-  // userUtils.js (update functions with localStorage)
-export const login = (username, password) => {
-    if (typeof window === 'undefined') return false; // Prevent SSR issues
-    const user = predefinedUsers.find(
-      (user) => user.username === username && user.password === password
-    );
-  
-    if (user) {
-      localStorage.setItem("currentUser", username);
-      return true;
-    } else {
-      return false;
-    }
-  };
-  
-  export const logout = () => {
-    if (typeof window !== 'undefined') {
-      localStorage.removeItem("currentUser");
-    }
-  };
-  
-  
-  // Function to save a note for the current user
-  export const saveNote = (note) => {
-    const username = localStorage.getItem("currentUser");
-    if (username) {
-      const notesKey = `notes_${username}`; // Key for storing user-specific notes
-      const notes = JSON.parse(localStorage.getItem(notesKey)) || [];
-      notes.push(note); // Add the new note
-      localStorage.setItem(notesKey, JSON.stringify(notes)); // Save updated notes
-    }
-  };
-  
-  // Function to retrieve notes for the current user
-  export const getNotes = () => {
-    const username = localStorage.getItem("currentUser");
-    if (username) {
-      const notesKey = `notes_${username}`;
-      return JSON.parse(localStorage.getItem(notesKey)) || []; // Return notes or an empty array
-    }
-    return []; // No notes if no user is logged in
-  };
-  
+};
 
-  export const getPredefinedUsers = () => predefinedUsers;
-  
+// Function to save a note for the current user
+export const saveNote = (note) => {
+  const currentUser = getCurrentUser();
+  if (currentUser) {
+    const userNotes = currentUser.notes || [];
+    const updatedNotes = [...userNotes, note];
+    updateUserNotes(updatedNotes);
+  }
+};
+
+// Function to retrieve notes for the current user
+export const getNotes = () => {
+  const currentUser = getCurrentUser();
+  return currentUser?.notes || [];
+};
+
+export const getPredefinedUsers = () => predefinedUsers;
