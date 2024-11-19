@@ -12,10 +12,10 @@ function UpdatedPM() {
       'Done': ['Task 5']
     },
     'Stage 2: Hospital Meetings': {
-    'To Do': ['Task A', 'Task B'],
-    'In Progress': ['Task C'],
-    'Blocked': ['Task D'],
-    'Done': ['Task E']
+      'To Do': ['Task A', 'Task B'],
+      'In Progress': ['Task C'],
+      'Blocked': ['Task D'],
+      'Done': ['Task E']
     }
   });
 
@@ -45,37 +45,43 @@ function UpdatedPM() {
   return (
     <div>
       <h1 style={{ textAlign: 'center' }}>Your To-Dos</h1>
-      <div style={{ display: 'flex', gap: '20px'}}>
+      <div style={{ display: 'flex', gap: '20px' }}>
         {stages.map(stage => (
           <div
             key={stage}
             style={{ flex: 1, border: '1px solid #ddd', padding: '10px', borderRadius: '5px' }}
-            onDragOver={(event) => event.preventDefault()}
-            onDrop={(event) => handleDrop(event, stage)}
           >
             <h3 style={{ textAlign: 'center' }}>{stage}</h3>
-            <div style={{ minHeight: '100px', padding: '10px', backgroundColor: '#f9f9f9' }}>
-              {tasks[stage].map(task => (
-                <div
-                  key={task}
-                  draggable
-                  onDragStart={(event) => handleDragStart(event, task, stage)}
-                  style={{
-                    padding: '8px',
-                    marginBottom: '10px',
-                    backgroundColor: '#d1ecf1',
-                    border: '1px solid #bee5eb',
-                    borderRadius: '5px',
-                    cursor: 'move'
-                  }}
-                >
-                  {task}
-                </div>
+            {categories.map(category => (
+              <div
+                key={category}
+                style={{ minHeight: '100px', padding: '10px', backgroundColor: '#f9f9f9' }}
+                onDragOver={(event) => event.preventDefault()}
+                onDrop={(event) => handleDrop(event, stage, category)}
+              >
+                <h4>{category}</h4>
+                {tasks[stage][category].map(task => (
+                  <div
+                    key={task}
+                    draggable
+                    onDragStart={(event) => handleDragStart(event, task, stage, category)}
+                    style={{
+                      padding: '8px',
+                      marginBottom: '10px',
+                      backgroundColor: '#d1ecf1',
+                      border: '1px solid #bee5eb',
+                      borderRadius: '5px',
+                      cursor: 'move'
+                    }}
+                  >
+                    {task}
+                  </div>
+                ))}
               </div>
             ))}
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

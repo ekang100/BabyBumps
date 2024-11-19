@@ -63,8 +63,6 @@ function Vendors() {
     );
   };
 
-  console.log(vendors);
-
   return (
     <div className={styles.container}>
       <main className={styles.main}>
