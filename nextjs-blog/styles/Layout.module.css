@@ -41,7 +41,12 @@
   padding-bottom: 3px;
   justify-content: center;
   align-items: center;
-  border-bottom: 1px solid #000;
+  border-bottom: 1px solid #000; /* Default underline color */
+  transition: color 0.2s, border-color 0.2s; /* Smooth transition */
+}
+
+.header .navItem:hover {
+  border-bottom-color: #E65D71; /* Change underline color on hover */
 }
 
 .header .navText {

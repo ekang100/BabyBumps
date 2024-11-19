@@ -1,8 +1,5 @@
 import React from 'react';
 import InfoCard from '../components/InfoCard';
-import Image from 'next/image';
-import Link from 'next/link';
-import styles from '../styles/Home.module.css';
 
 const stages = [
   {
@@ -50,38 +47,7 @@ const stages = [
 
 const ProcessMap = () => {
   return (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      padding: '20px',
-      backgroundColor: '#faf5e6',
-      minHeight: '100vh',
-      fontFamily: 'Arial, sans-serif',
-    }}>
-      
-      {/* Header Section */}
-      <header className={styles.header} style={{
-        width: '100%', // Ensures the navbar spans the entire page
-        backgroundColor: '#fff',
-        boxShadow: '0px 4px 8px rgba(0, 0, 0, 0.1)',
-        padding: '10px 0',
-      }}>
-        <div className={styles.logoContainer} style={{ display: 'flex', alignItems: 'center', paddingLeft: '20px' }}>
-          <Image src="/logo.png" alt="Baby Bumps Logo" width={150} height={50} />
-        </div>
-        <nav className={styles.navbar} style={{
-          display: 'flex',
-          justifyContent: 'center',
-          gap: '20px',
-        }}>
-          <Link href="/about">About Us</Link>
-          <Link href="/surrogates">Find a Surrogate</Link>
-          <Link href="/forum">Forum</Link>
-          <Link href="/contact">Contact</Link>
-          <Link href="/processmap">Process Map</Link>
-        </nav>
-      </header>
+    <div>
       
       <h1 style={{ textAlign: 'center' }}>Process Map</h1>
       

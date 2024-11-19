@@ -145,3 +145,20 @@
 .footerLinks a:hover {
   color: #ff69b4;
 }
+
+.starButton {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: #ccc; /* Default color for inactive star */
+  transition: color 0.3s;
+}
+
+.starButton.active {
+  color: #E65D71; /* Color for active (starred) state */
+}
+
+.starButton:hover {
+  color: #FF6F61; /* Color on hover */
+}

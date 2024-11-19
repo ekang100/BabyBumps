@@ -1,9 +1,8 @@
-import { useState } from "react";
-import Link from "next/link";
+import { useState, useEffect } from "react";
 import styles from "../styles/Vendors.module.css";
 
-export default function Vendors() {
-  const [vendors] = useState([
+function Vendors() {
+  const [vendors, setVendors] = useState([
     {
       id: 1,
       name: "Fertility Center West",
@@ -14,6 +13,7 @@ export default function Vendors() {
         phone: "(555) 123-4567",
         email: "info@fcwest.com",
       },
+      starred: false,
     },
     {
       id: 2,
@@ -25,6 +25,7 @@ export default function Vendors() {
         phone: "(555) 987-6543",
         email: "contact@familylawpartners.com",
       },
+      starred: false,
     },
     {
       id: 3,
@@ -37,8 +38,32 @@ export default function Vendors() {
         phone: "(555) 456-7890",
         email: "hello@surrogacysupport.com",
       },
+      starred: false,
     },
   ]);
+
+  useEffect(() => {
+    // Load vendors from local storage on client side
+    const savedVendors = localStorage.getItem("vendors");
+    if (savedVendors) {
+      setVendors(JSON.parse(savedVendors));
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save vendors to local storage whenever they change
+    localStorage.setItem("vendors", JSON.stringify(vendors));
+  }, [vendors]);
+
+  const toggleStar = (id) => {
+    setVendors((prevVendors) =>
+      prevVendors.map((vendor) =>
+        vendor.id === id ? { ...vendor, starred: !vendor.starred } : vendor
+      )
+    );
+  };
+
+  console.log(vendors);
 
   return (
     <div className={styles.container}>
@@ -61,6 +86,12 @@ export default function Vendors() {
                 <p>Phone: {vendor.contact.phone}</p>
                 <p>Email: {vendor.contact.email}</p>
               </div>
+              <button
+                onClick={() => toggleStar(vendor.id)}
+                className={`${styles.starButton} ${vendor.starred ? styles.active : ''}`}
+              >
+                {vendor.starred ? "Unstar" : "Star"}
+              </button>
             </div>
           ))}
         </div>
@@ -68,3 +99,5 @@ export default function Vendors() {
     </div>
   );
 }
+
+export default Vendors;

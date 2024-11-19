@@ -2,8 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 
-export default function Home() {
+function Home() {
   return (
+<<<<<<< HEAD
     <div className={styles.container}>
       {/* Header Section */}
       <header className={styles.header}>
@@ -19,6 +20,9 @@ export default function Home() {
           <Link href="/updatedpm">To Do!</Link>
         </nav>
       </header>
+=======
+    <div>
+>>>>>>> main
       {/* Hero Section */}
       <section className={styles.heroSection}>
         <div className={styles.heroTextContainer}>
@@ -105,3 +109,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;
