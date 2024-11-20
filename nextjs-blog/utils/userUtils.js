@@ -21,7 +21,6 @@ const predefinedUsers = [
     "andrew@example.com"
   ),
 ];
-
 export const login = (username, password) => {
   if (typeof window === "undefined") return false;
 
@@ -32,6 +31,7 @@ export const login = (username, password) => {
   if (user) {
     const { password: _, ...userWithoutPassword } = user;
     localStorage.setItem("currentUser", JSON.stringify(userWithoutPassword));
+    window.dispatchEvent(new Event('user_change')); // Trigger custom "user" event
     return true;
   }
   return false;
@@ -40,6 +40,7 @@ export const login = (username, password) => {
 export const logout = () => {
   if (typeof window !== "undefined") {
     localStorage.removeItem("currentUser");
+    window.dispatchEvent(new Event('user_change')); // Trigger custom "user" event
   }
 };
 

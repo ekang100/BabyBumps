@@ -58,6 +58,23 @@
   word-wrap: break-word;
 }
 
+.spinnerContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinner {
+  font-size: 20px;
+  color: #666;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
 .main {
   flex: 1;
   /* margin-top: 64px; instead, put padding in components*/

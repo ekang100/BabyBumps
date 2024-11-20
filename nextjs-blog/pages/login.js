@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { login, logout, getCurrentUser } from "../utils/userUtils";
+import { login, getCurrentUser } from "../utils/userUtils";
 import styles from "../styles/Login.module.css";
 import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 import { useRouter } from "next/router";
