@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const stages = ['Stage 1: Contact Surrogate', 'Stage 2: Hospital Meetings']; // Main stages
 const categories = ['To Do', 'In Progress', 'Blocked', 'Done']; // Subcategories
 
-function UpdatedPM() {
+const UpdatedPM = () => {
   const [tasks, setTasks] = useState({
     'Stage 1: Contact Surrogate': {
       'To Do': ['Task 1', 'Task 2'],

@@ -97,4 +97,6 @@ const LoginPage = () => {
   );
 };
 
+LoginPage.fixedFooter = true;
+
 export default LoginPage;

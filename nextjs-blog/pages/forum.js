@@ -2,7 +2,7 @@ import { useState } from "react";
 import styles from "../styles/Forum.module.css";
 import Post from "../components/Post";
 
-function Forum() {
+const Forum = () => {
   const [posts, setPosts] = useState([
     {
       id: 1,
@@ -102,8 +102,6 @@ function Forum() {
       </main>
     </div>
   );
-}
-
-Forum.fixedFooter = true;
+};
 
 export default Forum;

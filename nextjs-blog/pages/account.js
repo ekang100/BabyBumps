@@ -67,4 +67,6 @@ const AccountPage = () => {
   );
 };
 
+AccountPage.fixedFooter = true;
+
 export default AccountPage;

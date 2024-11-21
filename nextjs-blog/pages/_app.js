@@ -3,7 +3,7 @@ import Header from '../components/Header/Header';
 import Footer from '../components/Footer/Footer';
 import styles from '../styles/Layout.module.css';
 
-function MyApp({ Component, pageProps }) {
+const MyApp = ({ Component, pageProps }) => {
   // Determine if the footer should be fixed based on the page
   const fixedFooter = Component.fixedFooter === true; // Default to false unless specified
 

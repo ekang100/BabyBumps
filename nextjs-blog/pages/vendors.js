@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import styles from "../styles/Vendors.module.css";
 
-function Vendors() {
+const Vendors = () => {
   const [vendors, setVendors] = useState([
     {
       id: 1,

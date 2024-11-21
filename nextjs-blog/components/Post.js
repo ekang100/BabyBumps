@@ -2,7 +2,7 @@
 
 import styles from '../styles/Post.module.css';
 
-function Post({ post, replyContent, setReplyContent, handleReplySubmit }) {
+const Post = ({ post, replyContent, setReplyContent, handleReplySubmit }) => {
   return (
     <div className={styles.postCard}>
       <div className={styles.postHeader}>
