@@ -1,0 +1,77 @@
+.Common {
+    width: 100%;
+    padding-top: 24px;
+    padding-bottom: 36px;
+    padding-left: 156px;
+    padding-right: 156px;
+    background: #7995E8;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  
+  .Common .logoImage {
+    height: 31px; 
+  }
+  
+  .Common .linksContainer {
+    align-self: stretch;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .Common .linkGroup {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 24px;
+  }
+  
+  .Common .linkItem {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border-bottom: 1px solid white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .Common .linkText {
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 14px;
+    word-wrap: break-word;
+  }
+  
+  .Common .copyright {
+    text-align: center;
+    color: white;
+    font-size: 14px;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    line-height: 14px;
+    word-wrap: break-word;
+  }
+  
+  .Fixed {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    background-color: #7995E8;
+    border-top: 1px solid #EEE;
+    text-align: center;
+    z-index: 1000;
+  }
+  
+  .Scrollable {
+    background-color: #7995E8;
+    border-top: 1px solid #EEE;
+    text-align: center;
+  }
