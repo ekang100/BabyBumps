@@ -1,5 +1,7 @@
 import React from 'react';
 import styles from './Popup.module.css';
+import StandardButton from '../buttons/standardButton';
+import StandardInput from '../inputs/standardInput';
 
 const Popup = ({ title, onSave, placeholder, value, onChange }) => {
   return (
@@ -7,16 +9,17 @@ const Popup = ({ title, onSave, placeholder, value, onChange }) => {
       <div className={styles.popupContent}>
         <div className={styles.popupHeader}>
           {title}
-          <textarea
-            className={styles.textarea}
+          <StandardInput
+            type="textarea"
             value={value}
             onChange={onChange}
             placeholder={placeholder}
+            className={styles.textarea}
           />
         </div>
-        <button onClick={onSave} className={styles.saveButton}>
+        <StandardButton onClick={onSave}>
           Save
-        </button>
+        </StandardButton>
       </div>
     </div>
   );

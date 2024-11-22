@@ -2,54 +2,49 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
+  border: 1px solid var(--color-black);
+  border-radius: var(--radius-sm);
+  transition: transform 0.2s ease, opacity 0.2s ease; /* Add transition */
+}
+
+.taskContainer:hover {
+  transform: translateX(+2.5px); /* Slightly lift the card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Add shadow for depth */
 }
 
 .taskHeader {
-  align-self: stretch;
-  padding: 8px 12px 4px 12px; /* Matches the original padding */
-  background: #E65D71;
-  border-top-left-radius: 8px;
-  border-top-right-radius: 8px;
+  padding: var(--spacing-sm) var(--spacing-base) var(--spacing-xs) var(--spacing-base);
+  background: var(--color-accent);
+  border-top-left-radius: calc(var(--radius-sm) - 1px);
+  border-top-right-radius: calc(var(--radius-sm) - 1px);
   display: flex;
-  justify-content: center;
   align-items: center;
-  gap: 10px;
+  gap: var(--spacing-sm);
 }
 
 .taskTitle {
-  flex: 1 1 0;
-  color: white;
-  font-size: 17.5px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  line-height: 26.25px;
-  word-wrap: break-word;
+  flex: 1;
+  color: var(--color-white);
+  font-size: var(--font-base);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-150);
 }
 
 .taskBody {
-  align-self: stretch;
-  padding: 6px 12px; /* Matches the original padding */
-  background: white;
-  border: 1px solid #E65D71;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+  padding: var(--spacing-xs) var(--spacing-base);
+  background: var(--color-white);
+  border-bottom-left-radius: calc(var(--radius-sm) - 1px);
+  border-bottom-right-radius: calc(var(--radius-sm) - 1px);
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-start;
-  gap: 5px;
+  gap: var(--spacing-xs);
 }
 
 .taskDescription {
-  align-self: stretch;
   color: rgba(0, 0, 0, 0.75);
-  font-size: 14px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 400;
-  line-height: 21px;
-  word-wrap: break-word;
+  font-size: var(--font-base);
+  font-weight: var(--font-weight-regular);
+  line-height: var(--line-height-150);
 }
 
 .taskFooter {
@@ -63,19 +58,17 @@
 }
 
 .taskIconContainer {
-  padding: 5px 8px; /* Matches the original padding */
-  border-radius: 5px;
-  border: 1px solid #D1D5DB;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--color-black);
   display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 8px;
+  gap: var(--spacing-sm);
   cursor: pointer;
   transition: border-color 0.2s ease;
 }
 
 .taskIconContainer:hover {
-  border-color: #7995E8;
+  border-color: var(--color-primary);
 }
 
 .taskIcon {
@@ -87,95 +80,10 @@
 .taskStatusIndicator {
   width: 8px;
   height: 8px;
-  background: #7995E8;
-  border-radius: 9999px;
+  background: var(--color-primary);
+  border-radius: var(--radius-full);
 }
 
-/* Pop-up Overlay */
-.popupOverlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(255, 255, 255, 0.30); /* Semi-transparent background */
-  backdrop-filter: blur(5px);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000; /* Above other elements */
-}
-
-/* Pop-up Content */
-.popupContent {
-  width: 100%;
-  max-width: 600px;
-  padding: 12px 24px 24px 24px;
-  background: rgba(255, 255, 255, 0.90);
-  border: 1px black solid;
-  border-radius: 16px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: flex-end;
-  gap: 24px;
-}
-
-/* Pop-up Header */
-.popupHeader {
-  align-self: stretch;
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center; 
-  gap: 8px;
-  text-align: center;
-  color: black;
-  font-size: 17.5px;
-  font-family: 'Inter', sans-serif;
-  font-weight: 500;
-  line-height: 26.25px;
-  word-wrap: break-word;
-}
-
-/* Notes Textarea */
-.notesTextarea {
-  align-self: stretch;
-  flex: 1 1 0;
-  padding: 14px;
-  background: #FFFEF5;
-  border-radius: 9px;
-  border: 1px #E5E7EB solid;
-  resize: vertical;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  color: black;
-  min-height: 268px;
-  display: inline-flex;
-  justify-content: flex-start;
-  align-items: flex-start;
-}
-
-/* Save Button */
-.saveButton {
-  height: 38px;
-  padding: 10.5px 26px;
-  background: #FFFEF5;
-  border: 1px #D1D5DB solid;
-  border-radius: 9px;
-  display: inline-flex;
-  justify-content: center;
-  align-items: center;
-  gap: 7px;
-  cursor: pointer;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 600;
-  color: #E65D71;
-  transition: background-color 0.3s;
-}
-
-.saveButton:hover {
-  background-color: #e0e0e0; /* Optional: Change background on hover for feedback */
+.dragging {
+  opacity: 0.5; /* Reduce opacity */
 }

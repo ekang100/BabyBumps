@@ -1,0 +1,51 @@
+:root {
+  /* Colors */
+  --color-primary: #7995E8;
+  --color-accent: #E65D71;
+  --color-background: #FFFEF5;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* Color with opacity */
+  --color-black-75: rgba(0, 0, 0, 0.75);
+  --color-black-50: rgba(0, 0, 0, 0.50);
+  --color-white-90: rgba(255, 255, 255, 0.90);
+  --color-white-30: rgba(255, 255, 255, 0.30);
+
+  /* Font Sizes */
+  --font-xs: 10.5px;
+  --font-sm: 12.3px;
+  --font-base: 14px;
+  --font-md: 17.5px;
+  --font-lg: 21px;
+  --font-xl: 24.5px;
+  --font-2xl: 28px;
+  --font-3xl: 35px;
+
+  /* Line Heights */
+  --line-height-100: 100%;
+  --line-height-150: 150%;
+  --line-height-auto: auto;
+
+  /* Spacing */
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-base: 12px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+
+  /* Border Radius */
+  --radius-sm: 4px;
+  --radius-base: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  /* Font Weights */
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+} 

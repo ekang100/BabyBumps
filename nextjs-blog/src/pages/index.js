@@ -37,7 +37,7 @@ const Home = () => {
 
       {/* Services Section */}
       <section className={styles.servicesSection}>
-        <h2>Our Services</h2>
+        <h2 className={styles.sectionTitle}>Our Services</h2>
         <div className={styles.serviceCardsContainer}>
           <div className={styles.serviceCard}>
             <Image
@@ -46,9 +46,9 @@ const Home = () => {
               width={300}
               height={200}
             />
-            <h3>Surrogate Support</h3>
-            <p>
-              Providing surrogates with comprehensive support throughout their
+            <h3 className={styles.serviceTitle}>Surrogate Support</h3>
+            <p className={styles.serviceDescription}>
+              Providing surrogates with the support throughout their
               journey.
             </p>
           </div>
@@ -59,8 +59,8 @@ const Home = () => {
               width={300}
               height={200}
             />
-            <h3>Parent Guidance</h3>
-            <p>
+            <h3 className={styles.serviceTitle}>Parent Guidance</h3>
+            <p className={styles.serviceDescription}>
               Guiding intended parents through each step to grow their family.
             </p>
           </div>
@@ -71,27 +71,29 @@ const Home = () => {
               width={300}
               height={200}
             />
-            <h3>Legal Assistance</h3>
-            <p>Helping navigate the legal aspects of surrogacy with ease.</p>
+            <h3 className={styles.serviceTitle}>Legal Assistance</h3>
+            <p className={styles.serviceDescription}>
+              Helping navigate the legal aspects of surrogacy with ease.
+            </p>
           </div>
         </div>
       </section>
 
       {/* Testimonials Section */}
       <section className={styles.testimonialsSection}>
-        <h2>What Our Families Say</h2>
+        <h2 className={styles.sectionTitle}>What Our Families Say</h2>
         <div className={styles.testimonialCard}>
-          <p>
+          <p className={styles.testimonialText}>
             "Baby Bumps made our dream come true. We are forever grateful for
             the love and support throughout our surrogacy journey."
           </p>
-          <h4>- Sarah & John</h4>
+          <h4 className={styles.testimonialAuthor}>- Sarah & John</h4>
         </div>
       </section>
 
       {/* Call to Action Section */}
       <section className={styles.ctaSection}>
-        <h2>Ready to Start Your Journey?</h2>
+        <h2 className={styles.ctaTitle}>Ready to Start Your Journey?</h2>
         <StandardButton onClick={() => router.push('/forum')}>
           Join the Community
         </StandardButton>

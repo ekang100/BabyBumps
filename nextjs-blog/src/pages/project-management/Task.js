@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { FiEdit } from 'react-icons/fi';
 import styles from './Task.module.css';
-import Popup from '../../components/Popup/Popup';
+import Popup from '../../components/Popup';
 
 const Task = ({
   taskId,
@@ -44,8 +44,14 @@ const Task = ({
   return (
     <div
       draggable
-      onDragStart={(event) => handleDragStart(event, taskId, stage, category, index)}
-      onDragEnd={handleDragEnd}
+      onDragStart={(event) => {
+        handleDragStart(event, taskId, stage, category, index);
+        event.currentTarget.classList.add(styles.dragging); // Add dragging class
+      }}
+      onDragEnd={(event) => {
+        handleDragEnd();
+        event.currentTarget.classList.remove(styles.dragging); // Remove dragging class
+      }}
       className={styles.taskContainer}
       data-id={taskId}
     >

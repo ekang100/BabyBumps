@@ -64,7 +64,6 @@ const Vendors = () => {
 
   return (
     <div className={styles.container}>
-      <main className={styles.main}>
         <h1 className={styles.title}>Trusted Vendors</h1>
         <p className={styles.description}>
           Connect with our network of verified surrogacy and fertility
@@ -91,8 +90,7 @@ const Vendors = () => {
               </div>
             </div>
           ))}
-        </div>
-      </main>
+        </div>  
     </div>
   );
 }

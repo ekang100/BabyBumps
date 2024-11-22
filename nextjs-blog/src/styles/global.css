@@ -1,21 +1,15 @@
+@import './designSystem.css';
+
 html,
 body {
   padding: 0;
   margin: 0;
-  height: 100%; /* Ensures full height for flexbox layouts */
-  font-family:
-    Inter,
-    -apple-system,
-    BlinkMacSystemFont,
-    Segoe UI,
-    Roboto,
-    Oxygen,
-    Ubuntu,
-    Cantarell,
-    Fira Sans,
-    Droid Sans,
-    Helvetica Neue,
-    sans-serif;
+  height: 100%;
+  font-family: 'Inter', sans-serif;
+  font-size: var(--font-base);
+  line-height: var(--line-height-150);
+  color: var(--color-black);
+  background-color: var(--color-background);
 }
 
 a {
@@ -30,4 +24,27 @@ a {
 img {
   max-width: 100%;
   height: auto;
+}
+
+/* Utility Classes */
+.flex {
+  display: flex;
+}
+
+.flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.text-center {
+  text-align: center;
+}
+
+.mt-lg {
+  margin-top: var(--spacing-lg);
+}
+
+.mb-lg {
+  margin-bottom: var(--spacing-lg);
 }
