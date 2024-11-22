@@ -1,94 +1,66 @@
 .container {
-  min-height: 100vh;
-  padding: 2rem;
-  background-color: #f9f9f9;
+  padding: 0 var(--spacing-2xl);
+  height: calc(100vh - 64px - 127px); /* Subtract header and footer heights */
   display: flex;
+  align-items: center;
   justify-content: center;
 }
 
 .accountCard {
-  background: white;
-  padding: 2rem;
-  border-radius: 15px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  background: var(--color-white);
+  padding: var(--spacing-2xl);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-black);
   width: 100%;
   max-width: 800px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .accountCard h1 {
-  color: #333;
-  margin-bottom: 2rem;
+  color: var(--color-black);
+  margin-bottom: var(--spacing-2xl);
   text-align: center;
+  font-size: var(--font-2xl);
+  font-weight: var(--font-weight-bold);
 }
 
-.userProfile,
-.userNotes {
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  background: #f8f9fa;
-  border-radius: 10px;
+.userProfile {
+  padding: var(--spacing-xl);
+  background: var(--color-background);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-black);
+  margin-bottom: var(--spacing-2xl);
 }
 
-.userProfile h2,
-.userNotes h2 {
-  color: #444;
-  margin-bottom: 1rem;
-  font-size: 1.5rem;
+.userProfile h2 {
+  color: var(--color-black);
+  margin-bottom: var(--spacing-base);
+  font-size: var(--font-lg);
+  font-weight: var(--font-weight-semibold);
 }
 
 .profileDetails p {
-  margin: 0.5rem 0;
-  color: #666;
-  font-size: 1.1rem;
+  margin: var(--spacing-xs) 0;
+  color: var(--color-black-50);
+  font-size: var(--font-base);
+  line-height: var(--line-height-150);
 }
 
 .profileDetails strong {
-  color: #333;
-}
-
-.userNotes ul {
-  list-style: none;
-  padding: 0;
-}
-
-.userNotes li {
-  padding: 0.75rem;
-  border-bottom: 1px solid #eee;
-  color: #666;
-}
-
-.userNotes li:last-child {
-  border-bottom: none;
-}
-
-.logoutButton {
-  background: #e65d71;
-  color: white;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 100%;
-  margin-top: 1rem;
-}
-
-.logoutButton:hover {
-  background: #d54c60;
+  color: var(--color-black);
+  font-weight: var(--font-weight-medium);
 }
 
 @media (max-width: 600px) {
   .container {
-    padding: 1rem;
+    padding: var(--spacing-base);
   }
 
   .accountCard {
-    padding: 1rem;
+    padding: var(--spacing-lg);
   }
 
-  .userProfile,
-  .userNotes {
-    padding: 1rem;
+  .userProfile {
+    padding: var(--spacing-base);
   }
 }

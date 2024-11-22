@@ -31,8 +31,3 @@
     text-align: center;
     color: var(--color-black);
   }
-  
-  .textarea {
-    min-height: 268px;
-    margin-top: var(--spacing-base);
-  }

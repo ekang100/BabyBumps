@@ -1,92 +1,80 @@
-import React, { useState, useEffect } from "react";
-import { login, getCurrentUser } from "../../utils/userUtils";
-import styles from "./login.module.css";
-import { FaUser, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
-import { useRouter } from "next/router";
+import { useState } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
+import { FiMail, FiLock, FiEye, FiEyeOff } from 'react-icons/fi';
+import styles from './login.module.css';
+import { login } from '../../utils/userUtils';
+import StandardButton from '../../components/buttons/standardButton';
+import StandardInput from '../../components/inputs/standardInput';
 
 const LoginPage = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
 
-  useEffect(() => {
-    const checkAuth = () => {
-      const currentUser = getCurrentUser();
-      if (currentUser) {
-        router.replace("/account");
-      } else {
-        setIsLoading(false);
-      }
-    };
-    checkAuth();
-  }, []);
-
-  const handleLogin = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    const success = login(username, password);
-    if (success) {
-      router.replace("/account");
+    if (login(username, password)) {
+      router.push('/account');
     } else {
-      alert("Invalid username or password.");
+      alert('Invalid credentials');
     }
   };
-
-  if (isLoading) {
-    return null;
-  }
 
   return (
     <div className={styles.container}>
       <div className={styles.loginCard}>
         <h1 className={styles.title}>Welcome Back</h1>
-        <p className={styles.subtitle}>Please sign in to continue</p>
-        <form onSubmit={handleLogin} className={styles.form}>
+        <p className={styles.subtitle}>Sign in to continue</p>
+        
+        <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputGroup}>
-            <FaUser className={styles.inputIcon} />
-            <input
+            <FiMail className={styles.inputIcon} />
+            <StandardInput
               type="text"
-              placeholder="Username"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
+              placeholder="Username"
               className={styles.input}
-              required
             />
           </div>
+
           <div className={styles.inputGroup}>
-            <FaLock className={styles.inputIcon} />
-            <input
+            <FiLock className={styles.inputIcon} />
+            <StandardInput
               type={showPassword ? "text" : "password"}
-              placeholder="Password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              placeholder="Password"
               className={styles.input}
-              required
             />
             <button
               type="button"
               className={styles.passwordToggle}
               onClick={() => setShowPassword(!showPassword)}
             >
-              {showPassword ? <FaEyeSlash /> : <FaEye />}
+              {showPassword ? <FiEyeOff /> : <FiEye />}
             </button>
           </div>
+
           <div className={styles.options}>
             <label className={styles.rememberMe}>
               <input type="checkbox" /> Remember me
             </label>
-            <a href="#" className={styles.forgotPassword}>
+            <Link href="/forgot-password" className={styles.forgotPassword}>
               Forgot Password?
-            </a>
+            </Link>
           </div>
-          <button type="submit" className={styles.loginButton}>
+
+          <StandardButton type="submit">
             Sign In
-          </button>
-          <p className={styles.signupPrompt}>
-            Don't have an account? <a href="/signup">Sign up</a>
-          </p>
+          </StandardButton>
         </form>
+
+        <p className={styles.signupPrompt}>
+          Don't have an account? <Link href="/signup">Sign up</Link>
+        </p>
       </div>
     </div>
   );

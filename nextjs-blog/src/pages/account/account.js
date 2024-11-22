@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { getCurrentUser, logout } from "../../utils/userUtils";
 import styles from "./account.module.css";
+import StandardButton from "../../components/buttons/standardButton";
 
 const AccountPage = () => {
   const [user, setUser] = useState(null);
@@ -10,15 +11,15 @@ const AccountPage = () => {
   useEffect(() => {
     const currentUser = getCurrentUser();
     if (!currentUser) {
-      router.push("/auth/login");
+      router.push("/auth");
     } else {
       setUser(currentUser);
     }
-  }, []);
+  }, [router]);
 
   const handleLogout = () => {
     logout();
-    router.push("/auth/login");
+    router.push("/auth");
   };
 
   if (!user) {
@@ -28,7 +29,7 @@ const AccountPage = () => {
   return (
     <div className={styles.container}>
       <div className={styles.accountCard}>
-        <h1>Account Dashboard</h1>
+        <h1>My Account</h1>
         <div className={styles.userProfile}>
           <h2>Profile Information</h2>
           <div className={styles.profileDetails}>
@@ -37,22 +38,9 @@ const AccountPage = () => {
             <p><strong>Username:</strong> {user.username}</p>
           </div>
         </div>
-        <div className={styles.userNotes}>
-          <h2>Your Notes</h2>
-          <p>Total Notes: {user.notes.length}</p>
-          {user.notes.length > 0 ? (
-            <ul>
-              {user.notes.map((note, index) => (
-                <li key={index}>{note}</li>
-              ))}
-            </ul>
-          ) : (
-            <p>No notes yet</p>
-          )}
-        </div>
-        <button onClick={handleLogout} className={styles.logoutButton}>
+        <StandardButton onClick={handleLogout}>
           Sign Out
-        </button>
+        </StandardButton>
       </div>
     </div>
   );

@@ -1,10 +1,11 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import styles from './Popup.module.css';
 import StandardButton from '../buttons/standardButton';
 import StandardInput from '../inputs/standardInput';
 
 const Popup = ({ title, onSave, placeholder, value, onChange }) => {
-  return (
+  return ReactDOM.createPortal(
     <div className={styles.popupOverlay}>
       <div className={styles.popupContent}>
         <div className={styles.popupHeader}>
@@ -21,7 +22,8 @@ const Popup = ({ title, onSave, placeholder, value, onChange }) => {
           Save
         </StandardButton>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 
