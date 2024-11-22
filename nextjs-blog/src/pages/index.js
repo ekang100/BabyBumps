@@ -15,13 +15,13 @@ const Home = () => {
             Connecting intended parents with surrogates to make dreams come
             true.
           </p>
-          <Link className={styles.heroButton} href="/get-started">
+          <Link className={styles.heroButton} href="/project-management">
             Get Started
           </Link>
         </div>
         <div className={styles.heroImageContainer}>
           <Image
-            src="/hero-image.jpg"
+            src="/Families All Types 1.svg"
             alt="Happy family"
             layout="fill"
             objectFit="cover"
@@ -35,7 +35,7 @@ const Home = () => {
         <div className={styles.serviceCardsContainer}>
           <div className={styles.serviceCard}>
             <Image
-              src="/service1.jpg"
+              src="/People 4.svg"
               alt="Surrogate Support"
               width={300}
               height={200}
@@ -48,7 +48,7 @@ const Home = () => {
           </div>
           <div className={styles.serviceCard}>
             <Image
-              src="/service2.jpg"
+              src="/High Five 1.svg"
               alt="Parent Guidance"
               width={300}
               height={200}
@@ -60,7 +60,7 @@ const Home = () => {
           </div>
           <div className={styles.serviceCard}>
             <Image
-              src="/service3.jpg"
+              src="/Business Deal 3.svg"
               alt="Legal Assistance"
               width={300}
               height={200}
@@ -86,7 +86,7 @@ const Home = () => {
       {/* Call to Action Section */}
       <section className={styles.ctaSection}>
         <h2>Ready to Start Your Journey?</h2>
-        <Link href="/contact">Contact Us Today</Link>
+        <Link href="/forum">Join the Community</Link>
       </section>
     </div>
   );

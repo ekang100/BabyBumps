@@ -1,58 +1,68 @@
 .container {
-    padding: 2rem;
-  }
-  
-  .title {
-    text-align: center;
-    margin-bottom: 2rem;
-    color: #333;
-  }
-  
-  .stagesContainer {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    padding-bottom: 1rem;
-  }
-  
-  .stage {
-    flex: 1;
-    min-width: 300px;
-    border: 1px solid #ddd;
-    padding: 1rem;
-    border-radius: 5px;
-    background: white;
-  }
-  
-  .stageTitle {
-    text-align: center;
-    margin-bottom: 1rem;
-    color: #444;
-  }
-  
-  .category {
-    min-height: 100px;
-    padding: 1rem;
-    background-color: #f9f9f9;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-  }
-  
-  .categoryTitle {
-    margin-bottom: 0.5rem;
-    color: #666;
-  }
-  
-  .task {
-    padding: 8px;
-    margin-bottom: 10px;
-    background-color: #d1ecf1;
-    border: 1px solid #bee5eb;
-    border-radius: 5px;
-    cursor: move;
-    transition: transform 0.2s ease;
-  }
-  
-  .task:hover {
-    transform: translateY(-2px);
-  }
+  padding: 2rem 0;
+}
+
+.title {
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #333;
+}
+
+.stagesContainer {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 1rem;
+}
+
+.stage {
+  flex: 1;
+  min-width: 300px;
+  border: 1px solid #ddd;
+  padding: 1rem;
+  border-radius: 5px;
+  background: white;
+}
+
+.stageTitle {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #444;
+}
+
+.category {
+  min-height: 100px;
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  transition: background-color 0.2s ease;
+}
+
+.categoryTitle {
+  margin-bottom: 0.5rem;
+  color: #666;
+}
+
+.task {
+  padding: 8px;
+  margin-bottom: 10px;
+  background-color: #d1ecf1;
+  border: 1px solid #bee5eb;
+  border-radius: 5px;
+  cursor: grab;
+  transition: transform 0.2s ease, background-color 0.2s ease;
+}
+
+.task:active {
+  cursor: grabbing;
+}
+
+.task-dragging {
+  background-color: #cce5ff;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.category-dragging-over {
+  background-color: #e2e6ea;
+}

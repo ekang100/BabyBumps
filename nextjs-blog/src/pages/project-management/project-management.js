@@ -1,47 +1,42 @@
 import { useState } from 'react';
 import styles from './project-management.module.css';
-
 const UpdatedPM = () => {
-  const stages = ['Planning', 'In Progress', 'Review', 'Complete'];
-  const categories = ['Medical', 'Legal', 'Personal'];
+  const stages = ['Stage 1', 'Stage 2', 'Stage 3', 'Stage 4'];
+  const categories = ['To Do', 'In Progress', 'Done'];
   
   const [tasks, setTasks] = useState({
-    'Planning': {
-      'Medical': ['Schedule initial consultation', 'Complete health screening'],
-      'Legal': ['Review surrogacy laws', 'Prepare initial documentation'],
-      'Personal': ['Set timeline goals', 'Create support network']
+    'Stage 1': {
+      'To Do': ['Task 1', 'Task 2', "Task 3"],
+      'In Progress': [],
+      'Done': []
     },
-    'In Progress': {
-      'Medical': [],
-      'Legal': [],
-      'Personal': []
+    'Stage 2': {
+      'To Do': ['Task 4', 'Task 5', "Task 6"],
+      'In Progress': [],
+      'Done': []
     },
-    'Review': {
-      'Medical': [],
-      'Legal': [],
-      'Personal': []
+    'Stage 3': {
+      'To Do': ['Task 7', 'Task 8', "Task 9"],
+      'In Progress': [],
+      'Done': []
     },
-    'Complete': {
-      'Medical': [],
-      'Legal': [],
-      'Personal': []
-    }
+    'Stage 4': {
+      'To Do': ['Task 10', 'Task 11', "Task 12"],
+      'In Progress': [],
+      'Done': []
+    },
   });
-
   const handleDragStart = (event, task, sourceStage, sourceCategory) => {
     event.dataTransfer.setData('task', task);
     event.dataTransfer.setData('sourceStage', sourceStage);
     event.dataTransfer.setData('sourceCategory', sourceCategory);
   };
-
   const handleDrop = (event, targetStage, targetCategory) => {
     event.preventDefault();
     const task = event.dataTransfer.getData('task');
     const sourceStage = event.dataTransfer.getData('sourceStage');
     const sourceCategory = event.dataTransfer.getData('sourceCategory');
-
     if (sourceStage === targetStage && sourceCategory === targetCategory) return;
-
     setTasks(prev => {
       const newTasks = { ...prev };
       newTasks[sourceStage][sourceCategory] = newTasks[sourceStage][sourceCategory].filter(t => t !== task);
@@ -49,7 +44,6 @@ const UpdatedPM = () => {
       return newTasks;
     });
   };
-
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Your To-Dos</h1>
@@ -83,5 +77,4 @@ const UpdatedPM = () => {
     </div>
   );
 };
-
 export default UpdatedPM;

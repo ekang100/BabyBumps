@@ -1,5 +1,6 @@
 import React from 'react';
 import InfoCard from '../../components/InfoCard';
+import styles from './process-map.module.css';
 
 const stages = [
   {
@@ -48,69 +49,18 @@ const stages = [
 const ProcessMap = () => {
   return (
     <div>
-      <h1 style={{ textAlign: 'center' }}>Process Map</h1>
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        width: '100%',
-        maxWidth: '900px',
-        margin: '0 auto',
-        position: 'relative',
-      }}>
+      <h1 className={styles.title}>Process Map</h1>
+      <div className={styles.container}>
         {stages.map((stage, index) => (
-          <div key={index} style={{
-            display: 'flex',
-            alignItems: 'center',
-            marginBottom: '20px',
-          }}>
-            <div style={{
-              flex: 1,
-              display: 'flex',
-              flexDirection: 'column',
-              justifyContent: 'flex-end',
-              paddingRight: '20px',
-              maxWidth: '300px',
-              visibility: stage.left ? 'visible' : 'hidden',
-              zIndex: 2,
-            }}>
+          <div key={index} className={styles.stage}>
+            <div className={`${styles.side} ${styles.left}`}>
               {stage.left && <InfoCard title={stage.left.title} items={stage.left.items} />}
             </div>
-            <div style={{
-              display: 'flex',
-              flexDirection: 'column',
-              alignItems: 'center',
-              width: '80px',
-              zIndex: 3,
-              textAlign: 'center',
-              marginLeft: '20px',
-            }}>
-              <span style={{
-                color: '#ea5b5b',
-                fontWeight: 'bold',
-                fontSize: '0.9rem',
-                backgroundColor: '#faf5e6',
-                padding: '2px 8px',
-                borderRadius: '8px',
-                marginBottom: '10px',
-              }}>{stage.step}</span>
-              <div style={{
-                width: '4px',
-                height: '40px',
-                backgroundColor: '#ea5b5b',
-              }}></div>
+            <div className={styles.stepContainer}>
+              <span className={styles.step}>{stage.step}</span>
+              <div className={styles.connector}></div>
             </div>
-            <div style={{
-              flex: 1,
-              display: 'flex',
-              flexDirection: Array.isArray(stage.right) ? 'column' : 'row',
-              gap: '10px',
-              paddingLeft: '20px',
-              justifyContent: 'flex-start',
-              maxWidth: '300px',
-              visibility: stage.right ? 'visible' : 'hidden',
-              zIndex: 2,
-            }}>
+            <div className={`${styles.side} ${styles.right}`}>
               {Array.isArray(stage.right)
                 ? stage.right.map((item, i) => (
                     <InfoCard key={i} title={item.title} items={item.items} />
@@ -124,4 +74,4 @@ const ProcessMap = () => {
   );
 };
 
-export default ProcessMap; 
+export default ProcessMap;
