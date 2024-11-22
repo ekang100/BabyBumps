@@ -14,15 +14,51 @@ const taskData = {
       description: "Information, research, community.",
       notes: ""
     },
-    4: { title: "Task 4", description: "This is a description for task 4.", notes: "" },
-    5: { title: "Task 5", description: "This is a description for task 5.", notes: "" },
-    6: { title: "Task 6", description: "This is a description for task 6.", notes: "" },
-    7: { title: "Task 7", description: "This is a description for task 7.", notes: "" },
-    8: { title: "Task 8", description: "This is a description for task 8.", notes: "" },
-    9: { title: "Task 9", description: "This is a description for task 9.", notes: "" },
-    10: { title: "Task 10", description: "This is a description for task 10.", notes: "" },
-    11: { title: "Task 11", description: "This is a description for task 11.", notes: "" },
-    12: { title: "Task 12", description: "This is a description for task 12.", notes: "" },
+    4: { 
+      title: "Find Surrogacy Agency", 
+      description: "Research and compare reputable agencies.",
+      notes: "" 
+    },
+    5: { 
+      title: "Legal Consultation", 
+      description: "Meet with surrogacy attorney to understand process.",
+      notes: "" 
+    },
+    6: { 
+      title: "Financial Planning", 
+      description: "Budget and explore funding options.",
+      notes: "" 
+    },
+    7: { 
+      title: "Match with Surrogate", 
+      description: "Review profiles and find the right match.",
+      notes: "" 
+    },
+    8: { 
+      title: "Medical Screening", 
+      description: "Complete required medical evaluations.",
+      notes: "" 
+    },
+    9: { 
+      title: "Legal Contracts", 
+      description: "Draft and review surrogacy agreement.",
+      notes: "" 
+    },
+    10: { 
+      title: "Embryo Transfer", 
+      description: "Coordinate with clinic for transfer.",
+      notes: "" 
+    },
+    11: { 
+      title: "Pregnancy Support", 
+      description: "Regular check-ins and medical appointments.",
+      notes: "" 
+    },
+    12: { 
+      title: "Birth Planning", 
+      description: "Prepare necessary arrangements.",
+      notes: "" 
+    }
   };
   
   export default taskData;

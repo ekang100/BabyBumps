@@ -1,7 +1,7 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './project-management.module.css';
 import Task from './Task';
-import taskData from './taskData'; // Import taskData
+import taskData from './taskData';
 
 const InsertionIndicator = ({ isActive }) => (
   <div className={`${styles.insertionIndicator} ${isActive ? styles.active : ''}`} />
@@ -16,8 +16,8 @@ const Category = ({
   handleDragOverInsertion,
   handleDrop,
   dragInsertion,
-  tasks, // Receive tasks
-  updateTaskNotes, // Receive updateTaskNotes function
+  tasks,
+  updateTaskNotes,
 }) => (
   <div
     className={styles.category}
@@ -62,10 +62,10 @@ const Category = ({
           handleDragStart={handleDragStart}
           handleDragEnd={handleDragEnd}
           index={index}
-          title={tasks[taskId].title} // Pass title
-          description={tasks[taskId].description} // Pass description
-          notes={tasks[taskId].notes} // Pass notes
-          updateTaskNotes={updateTaskNotes} // Pass update function
+          title={tasks[taskId].title}
+          description={tasks[taskId].description}
+          notes={tasks[taskId].notes}
+          updateTaskNotes={updateTaskNotes}
         />
       </div>
     ))}
@@ -98,8 +98,8 @@ const Stage = ({
   handleDragOverInsertion,
   handleDrop,
   dragInsertion,
-  tasks, // Receive tasks
-  updateTaskNotes, // Receive updateTaskNotes function
+  tasks,
+  updateTaskNotes,
 }) => (
   <div className={styles.stage}>
     <h3 className={styles.stageTitle}>{stage}</h3>
@@ -114,32 +114,76 @@ const Stage = ({
         handleDragOverInsertion={handleDragOverInsertion}
         handleDrop={handleDrop}
         dragInsertion={dragInsertion}
-        tasks={tasks} // Pass tasks
-        updateTaskNotes={updateTaskNotes} // Pass updateTaskNotes
+        tasks={tasks}
+        updateTaskNotes={updateTaskNotes}
       />
     ))}
   </div>
 );
 
 const UpdatedPM = () => {
-  const stages = ['Stage 1', 'Stage 2', 'Stage 3', 'Stage 4'];
+  const stages = [
+    'Embryo Creation',
+    'Agency & Legal',
+    'Matching Process',
+    'Medical Journey',
+  ];
   const categories = ['To Do', 'In Progress', 'Done'];
 
+  // Initialize tasks and taskLog with default values
+  const [tasks, setTasks] = useState(taskData);
   const [taskLog, setTaskLog] = useState({
-    'Stage 1': { 'To Do': [1, 2, 3], 'In Progress': [], 'Done': [] },
-    'Stage 2': { 'To Do': [4, 5, 6], 'In Progress': [], 'Done': [] },
-    'Stage 3': { 'To Do': [7, 8, 9], 'In Progress': [], 'Done': [] },
-    'Stage 4': { 'To Do': [10, 11, 12], 'In Progress': [], 'Done': [] },
+    'Embryo Creation': { 'To Do': [1, 2, 3], 'In Progress': [], 'Done': [] },
+    'Agency & Legal': { 'To Do': [4, 5, 6], 'In Progress': [], 'Done': [] },
+    'Matching Process': { 'To Do': [7, 8, 9], 'In Progress': [], 'Done': [] },
+    'Medical Journey': { 'To Do': [10, 11, 12], 'In Progress': [], 'Done': [] },
   });
 
-  const [tasks, setTasks] = useState(taskData); // Initialize tasks state
+  // State to check if component has mounted
+  const [hasMounted, setHasMounted] = useState(false);
 
+  // State for drag and drop
   const [dragInsertion, setDragInsertion] = useState({
     isActive: false,
     stage: null,
     category: null,
     index: null,
   });
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+
+  // Load data from localStorage after component mounts
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const savedTasks = localStorage.getItem('tasks');
+      const savedTaskLog = localStorage.getItem('taskLog');
+
+      if (savedTasks) {
+        setTasks(JSON.parse(savedTasks));
+      }
+
+      if (savedTaskLog) {
+        setTaskLog(JSON.parse(savedTaskLog));
+      }
+
+      setHasMounted(true);
+    }
+  }, []);
+
+  // Save tasks to localStorage whenever tasks change
+  useEffect(() => {
+    if (hasMounted) {
+      localStorage.setItem('tasks', JSON.stringify(tasks));
+    }
+  }, [tasks, hasMounted]);
+
+  // Save taskLog to localStorage whenever taskLog changes
+  useEffect(() => {
+    if (hasMounted) {
+      localStorage.setItem('taskLog', JSON.stringify(taskLog));
+    }
+  }, [taskLog, hasMounted]);
 
   const handleDragStart = (event, taskId, sourceStage, sourceCategory, sourceIndex) => {
     event.dataTransfer.setData('taskId', taskId);
@@ -196,8 +240,12 @@ const UpdatedPM = () => {
           ? dragInsertion.index
           : targetTasks.length;
 
-      // Adjust insertIndex if the task is moved to a higher index
-      if (sourceIndex < insertIndex) {
+      // Adjust insertIndex if the task is moved to a higher index in the same category
+      if (
+        sourceStage === targetStage &&
+        sourceCategory === targetCategory &&
+        sourceIndex < insertIndex
+      ) {
         insertIndex -= 1;
       }
 
@@ -217,19 +265,37 @@ const UpdatedPM = () => {
   };
 
   // Function to update task notes
-  const updateTaskNotes = (taskId, notes) => {
-    setTasks((prevTasks) => ({
-      ...prevTasks,
-      [taskId]: {
-        ...prevTasks[taskId],
-        notes,
-      },
-    }));
+  const updateTaskNotes = async (taskId, notes) => {
+    setIsLoading(true);
+    setError(null);
+    try {
+      setTasks((prevTasks) => ({
+        ...prevTasks,
+        [taskId]: {
+          ...prevTasks[taskId],
+          notes,
+        },
+      }));
+    } catch (err) {
+      setError('Failed to update notes. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
+
+  if (error) {
+    return <div className={styles.error}>{error}</div>;
+  }
+
+  // Render null or loading while waiting for component to mount
+  if (!hasMounted) {
+    return null; // Or a loading spinner/component if preferred
+  }
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Your To-Dos</h1>
+      <h1 className={styles.title}>Surrogacy Journey Planner</h1>
+      {isLoading && <div className={styles.loading}>Updating...</div>}
       <div className={styles.stagesContainer}>
         {stages.map((stage) => (
           <Stage
@@ -242,8 +308,8 @@ const UpdatedPM = () => {
             handleDragOverInsertion={handleDragOverInsertion}
             handleDrop={handleDrop}
             dragInsertion={dragInsertion}
-            tasks={tasks} // Pass tasks
-            updateTaskNotes={updateTaskNotes} // Pass updateTaskNotes
+            tasks={tasks}
+            updateTaskNotes={updateTaskNotes}
           />
         ))}
       </div>

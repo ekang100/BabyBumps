@@ -25,6 +25,9 @@
   }
   
   .popupHeader {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-sm);
     font-size: var(--font-md);
     font-weight: var(--font-weight-medium);
     line-height: var(--line-height-150);

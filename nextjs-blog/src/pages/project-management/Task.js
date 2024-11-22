@@ -28,6 +28,14 @@ const Task = ({
     setIsPopupOpen(false);
   };
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      const event = new Event('dragstart');
+      e.currentTarget.dispatchEvent(event);
+    }
+  };
+
   if (!title || !description) {
     return (
       <div className={styles.taskContainer} data-id={taskId}>
@@ -46,14 +54,18 @@ const Task = ({
       draggable
       onDragStart={(event) => {
         handleDragStart(event, taskId, stage, category, index);
-        event.currentTarget.classList.add(styles.dragging); // Add dragging class
+        event.currentTarget.classList.add(styles.dragging);
       }}
       onDragEnd={(event) => {
         handleDragEnd();
-        event.currentTarget.classList.remove(styles.dragging); // Remove dragging class
+        event.currentTarget.classList.remove(styles.dragging);
       }}
+      onKeyDown={handleKeyDown}
       className={styles.taskContainer}
       data-id={taskId}
+      tabIndex={0}
+      role="button"
+      aria-label={`${title} task in ${category} category of ${stage}`}
     >
       <div className={styles.taskHeader}>
         <div className={styles.taskTitle}>{title}</div>

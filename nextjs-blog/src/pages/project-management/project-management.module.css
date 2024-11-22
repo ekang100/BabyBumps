@@ -87,3 +87,18 @@
     min-width: 250px;
   }
 }
+
+.error {
+  color: var(--color-error);
+  text-align: center;
+  padding: var(--spacing-lg);
+  margin: var(--spacing-lg);
+  border: 1px solid var(--color-error);
+  border-radius: var(--radius-base);
+}
+
+.loading {
+  text-align: center;
+  color: var(--color-primary);
+  padding: var(--spacing-sm);
+}
