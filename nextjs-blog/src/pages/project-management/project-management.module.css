@@ -11,7 +11,7 @@
 
 .stagesContainer {
   display: flex;
-  flex-direction: column; /* Adjusted for better vertical stacking */
+  flex-direction: column; /* Vertical stacking */
   gap: 20px;
   overflow-x: auto;
   padding-bottom: 1rem;
@@ -23,7 +23,7 @@
   padding: 1rem;
   border-radius: 5px;
   background: white;
-  margin-bottom: 1rem; /* Added spacing between stages */
+  margin-bottom: 1rem;
 }
 
 .stageTitle {
@@ -34,13 +34,12 @@
 
 /* Category Styles */
 .category {
-  min-height: 100px;
-  padding: 1rem;
+  padding: 0.2rem 1rem 1rem 1rem;
   background-color: #f9f9f9;
   border-radius: 4px;
   margin-bottom: 1rem;
   transition: background-color 0.2s ease;
-  position: relative; /* To position insertion indicators correctly */
+  position: relative;
 }
 
 .categoryTitle {
@@ -48,11 +47,24 @@
   color: #666;
 }
 
+.emptyCategory {
+  min-height: 8px;
+}
+
+.taskContainer {
+  display: flex;
+  flex-direction: column;
+}
+
+.insertionArea {
+  height: 6px;
+}
+
 /* Task Styles */
 .task {
-  position: relative; /* Required for insertion indicators */
+  position: relative;
   padding: 8px;
-  margin: 4px 0; /* Adjusted for consistent spacing */
+  margin: 0 0;
   background-color: #d1ecf1;
   border: 1px solid #bee5eb;
   border-radius: 5px;
@@ -64,32 +76,17 @@
   cursor: grabbing;
 }
 
-.taskInsertionBefore::before,
-.taskInsertionAfter::after {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
+/* Insertion Indicator Styles */
+.insertionIndicator {
   height: 2px;
+  background-color: transparent;
+  transition: background-color 0.2s ease;
+  margin: 2px 0;
+}
+
+.insertionIndicator.active {
   background-color: #007bff;
-}
-
-.taskInsertionBefore::before {
-  top: 0;
-}
-
-.taskInsertionAfter::after {
-  bottom: 0;
-}
-
-/* Dragging Styles */
-.task-dragging {
-  background-color: #cce5ff;
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
-}
-
-.category-dragging-over {
-  background-color: #e2e6ea;
+  border-radius: 2px;
 }
 
 /* Responsive Adjustments */
@@ -97,9 +94,9 @@
   .stagesContainer {
     flex-direction: row; /* Horizontal layout on larger screens */
   }
-  
+
   .stage {
     flex: 1;
-    min-width: 250px; /* Adjusted for better responsiveness */
+    min-width: 250px;
   }
 }

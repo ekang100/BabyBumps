@@ -1,7 +1,110 @@
 import { useState } from 'react';
 import styles from './project-management.module.css';
 
-const Stage = ({ stage, categories, taskLog, handleDragStart, handleDrop, handleDragOver, dragInsertion, handleDragEnd }) => (
+const InsertionIndicator = ({ isActive }) => (
+  <div className={`${styles.insertionIndicator} ${isActive ? styles.active : ''}`} />
+);
+
+const Task = ({ taskId, stage, category, handleDragStart, handleDragEnd, index }) => {
+  return (
+    <div
+      draggable
+      onDragStart={(event) => handleDragStart(event, taskId, stage, category, index)}
+      onDragEnd={handleDragEnd}
+      className={styles.task}
+      data-id={taskId}
+    >
+      Task {taskId}
+    </div>
+  );
+};
+
+const Category = ({
+  stage,
+  category,
+  taskIds,
+  handleDragStart,
+  handleDragEnd,
+  handleDragOverInsertion,
+  handleDrop,
+  dragInsertion,
+}) => (
+  <div
+    className={styles.category}
+    onDragOver={(event) => event.preventDefault()}
+    onDrop={(event) => handleDrop(event, stage, category)}
+  >
+    <h4 className={styles.categoryTitle}>{category}</h4>
+    {taskIds.length === 0 && (
+      <div
+        className={styles.emptyCategory}
+        onDragOver={(event) => handleDragOverInsertion(event, stage, category, 0)}
+      >
+        <InsertionIndicator
+          isActive={
+            dragInsertion.isActive &&
+            dragInsertion.stage === stage &&
+            dragInsertion.category === category &&
+            dragInsertion.index === 0
+          }
+        />
+      </div>
+    )}
+    {taskIds.map((taskId, index) => (
+      <div key={taskId} className={styles.taskContainer}>
+        <div
+          className={styles.insertionArea}
+          onDragOver={(event) => handleDragOverInsertion(event, stage, category, index)}
+        >
+          <InsertionIndicator
+            isActive={
+              dragInsertion.isActive &&
+              dragInsertion.stage === stage &&
+              dragInsertion.category === category &&
+              dragInsertion.index === index
+            }
+          />
+        </div>
+        <Task
+          taskId={taskId}
+          stage={stage}
+          category={category}
+          handleDragStart={handleDragStart}
+          handleDragEnd={handleDragEnd}
+          index={index}
+        />
+      </div>
+    ))}
+    {taskIds.length > 0 && (
+      <div
+        className={styles.insertionArea}
+        onDragOver={(event) =>
+          handleDragOverInsertion(event, stage, category, taskIds.length)
+        }
+      >
+        <InsertionIndicator
+          isActive={
+            dragInsertion.isActive &&
+            dragInsertion.stage === stage &&
+            dragInsertion.category === category &&
+            dragInsertion.index === taskIds.length
+          }
+        />
+      </div>
+    )}
+  </div>
+);
+
+const Stage = ({
+  stage,
+  categories,
+  taskLog,
+  handleDragStart,
+  handleDragEnd,
+  handleDragOverInsertion,
+  handleDrop,
+  dragInsertion,
+}) => (
   <div className={styles.stage}>
     <h3 className={styles.stageTitle}>{stage}</h3>
     {categories.map((category) => (
@@ -11,66 +114,14 @@ const Stage = ({ stage, categories, taskLog, handleDragStart, handleDrop, handle
         category={category}
         taskIds={taskLog[stage][category]}
         handleDragStart={handleDragStart}
+        handleDragEnd={handleDragEnd}
+        handleDragOverInsertion={handleDragOverInsertion}
         handleDrop={handleDrop}
-        handleDragOver={handleDragOver}
         dragInsertion={dragInsertion}
-        handleDragEnd={handleDragEnd}
       />
     ))}
   </div>
 );
-
-const Category = ({
-  stage,
-  category,
-  taskIds,
-  handleDragStart,
-  handleDrop,
-  handleDragOver,
-  dragInsertion,
-  handleDragEnd,
-}) => (
-  <div
-    className={styles.category}
-    onDragOver={handleDragOver}
-    onDrop={(event) => handleDrop(event, stage, category)}
-  >
-    <h4 className={styles.categoryTitle}>{category}</h4>
-    {taskIds.map((taskId, index) => (
-      <Task
-        key={taskId}
-        taskId={taskId}
-        stage={stage}
-        category={category}
-        handleDragStart={handleDragStart}
-        index={index}
-        dragInsertion={dragInsertion}
-        handleDragEnd={handleDragEnd}
-      />
-    ))}
-  </div>
-);
-
-const Task = ({ taskId, stage, category, handleDragStart, index, dragInsertion, handleDragEnd }) => {
-  const isDraggedOver = dragInsertion.draggedOverTaskId === taskId;
-  const insertionClass = isDraggedOver
-    ? dragInsertion.insertBefore
-      ? styles.taskInsertionBefore
-      : styles.taskInsertionAfter
-    : '';
-
-  return (
-    <div
-      draggable
-      onDragStart={(event) => handleDragStart(event, taskId, stage, category, index)}
-      onDragEnd={handleDragEnd}
-      className={`${styles.task} ${insertionClass}`}
-      data-id={taskId}
-    >
-      Task {taskId}
-    </div>
-  );
-};
 
 const UpdatedPM = () => {
   const stages = ['Stage 1', 'Stage 2', 'Stage 3', 'Stage 4'];
@@ -84,8 +135,10 @@ const UpdatedPM = () => {
   });
 
   const [dragInsertion, setDragInsertion] = useState({
-    draggedOverTaskId: null,
-    insertBefore: true,
+    isActive: false,
+    stage: null,
+    category: null,
+    index: null,
   });
 
   const handleDragStart = (event, taskId, sourceStage, sourceCategory, sourceIndex) => {
@@ -95,78 +148,66 @@ const UpdatedPM = () => {
     event.dataTransfer.setData('sourceIndex', sourceIndex);
   };
 
-  const handleDragOver = (event) => {
+  const handleDragOverInsertion = (event, stage, category, index) => {
     event.preventDefault();
-    const target = event.target.closest(`.${styles.task}`);
-
-    if (target) {
-      const taskId = parseInt(target.getAttribute('data-id'), 10);
-      const boundingRect = target.getBoundingClientRect();
-      const cursorY = event.clientY;
-      const midpoint = boundingRect.top + boundingRect.height / 2;
-      const insertBefore = cursorY < midpoint;
-
-      setDragInsertion({
-        draggedOverTaskId: taskId,
-        insertBefore: insertBefore,
-      });
-    }
+    setDragInsertion({
+      isActive: true,
+      stage,
+      category,
+      index,
+    });
   };
 
   const handleDragEnd = () => {
     setDragInsertion({
-      draggedOverTaskId: null,
-      insertBefore: true,
+      isActive: false,
+      stage: null,
+      category: null,
+      index: null,
     });
   };
 
   const handleDrop = (event, targetStage, targetCategory) => {
     event.preventDefault();
+
     const taskId = parseInt(event.dataTransfer.getData('taskId'), 10);
     const sourceStage = event.dataTransfer.getData('sourceStage');
     const sourceCategory = event.dataTransfer.getData('sourceCategory');
     const sourceIndex = parseInt(event.dataTransfer.getData('sourceIndex'), 10);
-  
+
     // Ensure the task is only moved within the same stage
     if (sourceStage !== targetStage) return;
-  
+
     setTaskLog((prev) => {
       const newTaskLog = { ...prev };
-  
+
       // Remove task from source
       const sourceTasks = [...newTaskLog[sourceStage][sourceCategory]];
-      const removedTask = sourceTasks.splice(sourceIndex, 1)[0];
+      sourceTasks.splice(sourceIndex, 1);
       newTaskLog[sourceStage][sourceCategory] = sourceTasks;
-  
-      // Determine the target index
-      const targetTasks = [...newTaskLog[targetStage][targetCategory]];
-      let targetIndex = targetTasks.length; // Default to end
-  
-      const { draggedOverTaskId, insertBefore } = dragInsertion;
-  
-      if (draggedOverTaskId !== null) {
-        const hoveredIndex = targetTasks.indexOf(draggedOverTaskId);
-        if (hoveredIndex !== -1) {
-          targetIndex = insertBefore ? hoveredIndex : hoveredIndex + 1;
-        }
-      }
-  
-      // Adjust logic to handle dragging the first item upwards
-      if (sourceIndex === 0 && insertBefore) {
-        targetIndex = 0; // Ensure it stays at the top
-      }
-  
+
       // Insert task at target index
-      targetTasks.splice(targetIndex, 0, removedTask);
+      const targetTasks = [...newTaskLog[targetStage][targetCategory]];
+
+      const insertIndex =
+        dragInsertion.stage === targetStage &&
+        dragInsertion.category === targetCategory &&
+        dragInsertion.index !== null
+          ? dragInsertion.index
+          : targetTasks.length;
+
+      targetTasks.splice(insertIndex, 0, taskId);
       newTaskLog[targetStage][targetCategory] = targetTasks;
-  
+
       return newTaskLog;
     });
-  
+
     // Reset the insertion state
     setDragInsertion({
-      draggedOverTaskId: null,
-      insertBefore: true,
+      isActive: false,
+      stage: null,
+      category: null,
+      index: null,
     });
   };
 
@@ -181,10 +222,10 @@ const UpdatedPM = () => {
             categories={categories}
             taskLog={taskLog}
             handleDragStart={handleDragStart}
-            handleDrop={handleDrop}
-            handleDragOver={handleDragOver}
-            dragInsertion={dragInsertion}
             handleDragEnd={handleDragEnd}
+            handleDragOverInsertion={handleDragOverInsertion}
+            handleDrop={handleDrop}
+            dragInsertion={dragInsertion}
           />
         ))}
       </div>
