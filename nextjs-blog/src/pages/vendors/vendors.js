@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { AiOutlineStar, AiFillStar } from "react-icons/ai"; // Import the icons
 import styles from "./vendors.module.css";
 
 const Vendors = () => {
@@ -73,6 +74,12 @@ const Vendors = () => {
         <div className={styles.vendorGrid}>
           {vendors.map((vendor) => (
             <div key={vendor.id} className={styles.vendorCard}>
+              <button
+                onClick={() => toggleStar(vendor.id)}
+                className={`${styles.starButton} ${vendor.starred ? styles.active : ''}`}
+              >
+                {vendor.starred ? <AiFillStar /> : <AiOutlineStar />}
+              </button>
               <h2>{vendor.name}</h2>
               <div className={styles.vendorType}>{vendor.type}</div>
               <div className={styles.vendorLocation}>{vendor.location}</div>
@@ -82,12 +89,6 @@ const Vendors = () => {
                 <p>Phone: {vendor.contact.phone}</p>
                 <p>Email: {vendor.contact.email}</p>
               </div>
-              <button
-                onClick={() => toggleStar(vendor.id)}
-                className={`${styles.starButton} ${vendor.starred ? styles.active : ''}`}
-              >
-                {vendor.starred ? "Unstar" : "Star"}
-              </button>
             </div>
           ))}
         </div>
@@ -96,4 +97,4 @@ const Vendors = () => {
   );
 }
 
-export default Vendors; 
+export default Vendors;

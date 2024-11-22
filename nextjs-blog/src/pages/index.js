@@ -1,8 +1,11 @@
 import Image from "next/image";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import styles from "./index/home.module.css";
+import StandardButton from '../components/buttons/standardButton';
 
 const Home = () => {
+  const router = useRouter();
+
   return (
     <div>
       {/* Hero Section */}
@@ -15,9 +18,12 @@ const Home = () => {
             Connecting intended parents with surrogates to make dreams come
             true.
           </p>
-          <Link className={styles.heroButton} href="/project-management">
+          <StandardButton 
+            onClick={() => router.push('/project-management')}
+            variant="large"
+          >
             Get Started
-          </Link>
+          </StandardButton>
         </div>
         <div className={styles.heroImageContainer}>
           <Image
@@ -86,7 +92,9 @@ const Home = () => {
       {/* Call to Action Section */}
       <section className={styles.ctaSection}>
         <h2>Ready to Start Your Journey?</h2>
-        <Link href="/forum">Join the Community</Link>
+        <StandardButton onClick={() => router.push('/forum')}>
+          Join the Community
+        </StandardButton>
       </section>
     </div>
   );

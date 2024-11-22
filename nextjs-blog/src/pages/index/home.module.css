@@ -53,22 +53,6 @@
   margin-top: 15px;
 }
 
-.heroButton {
-  display: inline-block;
-  background-color: #FF6F61;
-  color: white;
-  padding: 15px 25px;
-  border-radius: 5px;
-  text-decoration: none;
-  font-weight: bold;
-  transition: background-color 0.3s;
-  margin-top: 20px;
-}
-
-.heroButton:hover {
-  background-color: #FF4F41;
-}
-
 .heroImageContainer {
   position: relative;
   width: 45%;

@@ -1,0 +1,28 @@
+.button {
+  height: 38px;
+  padding: 10.5px 26px;
+  background: #FFFEF5;
+  border: 1px #D1D5DB solid;
+  border-radius: 9px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #E65D71;
+  transition: background-color 0.3s;
+}
+
+.button:hover {
+  background-color: #e0e0e0;
+}
+
+.largeButton {
+  height: 50px;
+  padding: 15px 30px;
+  font-size: 16px;
+  font-weight: 700;
+} 

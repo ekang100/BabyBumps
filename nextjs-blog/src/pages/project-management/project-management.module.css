@@ -60,22 +60,6 @@
   height: 6px;
 }
 
-/* Task Styles */
-.task {
-  position: relative;
-  padding: 8px;
-  margin: 0 0;
-  background-color: #d1ecf1;
-  border: 1px solid #bee5eb;
-  border-radius: 5px;
-  cursor: grab;
-  transition: transform 0.2s ease, background-color 0.2s ease;
-}
-
-.task:active {
-  cursor: grabbing;
-}
-
 /* Insertion Indicator Styles */
 .insertionIndicator {
   height: 2px;

@@ -1,23 +1,11 @@
 import { useState } from 'react';
 import styles from './project-management.module.css';
+import Task from './Task';
+import taskData from './taskData'; // Import taskData
 
 const InsertionIndicator = ({ isActive }) => (
   <div className={`${styles.insertionIndicator} ${isActive ? styles.active : ''}`} />
 );
-
-const Task = ({ taskId, stage, category, handleDragStart, handleDragEnd, index }) => {
-  return (
-    <div
-      draggable
-      onDragStart={(event) => handleDragStart(event, taskId, stage, category, index)}
-      onDragEnd={handleDragEnd}
-      className={styles.task}
-      data-id={taskId}
-    >
-      Task {taskId}
-    </div>
-  );
-};
 
 const Category = ({
   stage,
@@ -28,6 +16,8 @@ const Category = ({
   handleDragOverInsertion,
   handleDrop,
   dragInsertion,
+  tasks, // Receive tasks
+  updateTaskNotes, // Receive updateTaskNotes function
 }) => (
   <div
     className={styles.category}
@@ -72,6 +62,10 @@ const Category = ({
           handleDragStart={handleDragStart}
           handleDragEnd={handleDragEnd}
           index={index}
+          title={tasks[taskId].title} // Pass title
+          description={tasks[taskId].description} // Pass description
+          notes={tasks[taskId].notes} // Pass notes
+          updateTaskNotes={updateTaskNotes} // Pass update function
         />
       </div>
     ))}
@@ -104,6 +98,8 @@ const Stage = ({
   handleDragOverInsertion,
   handleDrop,
   dragInsertion,
+  tasks, // Receive tasks
+  updateTaskNotes, // Receive updateTaskNotes function
 }) => (
   <div className={styles.stage}>
     <h3 className={styles.stageTitle}>{stage}</h3>
@@ -118,6 +114,8 @@ const Stage = ({
         handleDragOverInsertion={handleDragOverInsertion}
         handleDrop={handleDrop}
         dragInsertion={dragInsertion}
+        tasks={tasks} // Pass tasks
+        updateTaskNotes={updateTaskNotes} // Pass updateTaskNotes
       />
     ))}
   </div>
@@ -133,6 +131,8 @@ const UpdatedPM = () => {
     'Stage 3': { 'To Do': [7, 8, 9], 'In Progress': [], 'Done': [] },
     'Stage 4': { 'To Do': [10, 11, 12], 'In Progress': [], 'Done': [] },
   });
+
+  const [tasks, setTasks] = useState(taskData); // Initialize tasks state
 
   const [dragInsertion, setDragInsertion] = useState({
     isActive: false,
@@ -189,12 +189,17 @@ const UpdatedPM = () => {
       // Insert task at target index
       const targetTasks = [...newTaskLog[targetStage][targetCategory]];
 
-      const insertIndex =
+      let insertIndex =
         dragInsertion.stage === targetStage &&
         dragInsertion.category === targetCategory &&
         dragInsertion.index !== null
           ? dragInsertion.index
           : targetTasks.length;
+
+      // Adjust insertIndex if the task is moved to a higher index
+      if (sourceIndex < insertIndex) {
+        insertIndex -= 1;
+      }
 
       targetTasks.splice(insertIndex, 0, taskId);
       newTaskLog[targetStage][targetCategory] = targetTasks;
@@ -209,6 +214,17 @@ const UpdatedPM = () => {
       category: null,
       index: null,
     });
+  };
+
+  // Function to update task notes
+  const updateTaskNotes = (taskId, notes) => {
+    setTasks((prevTasks) => ({
+      ...prevTasks,
+      [taskId]: {
+        ...prevTasks[taskId],
+        notes,
+      },
+    }));
   };
 
   return (
@@ -226,6 +242,8 @@ const UpdatedPM = () => {
             handleDragOverInsertion={handleDragOverInsertion}
             handleDrop={handleDrop}
             dragInsertion={dragInsertion}
+            tasks={tasks} // Pass tasks
+            updateTaskNotes={updateTaskNotes} // Pass updateTaskNotes
           />
         ))}
       </div>

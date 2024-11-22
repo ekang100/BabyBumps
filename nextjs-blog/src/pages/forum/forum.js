@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styles from "./forum.module.css";
-import Post from "../../components/Post";
+import Post from "./Post";
+import StandardButton from '../../components/buttons/standardButton';
 
 const Forum = () => {
   const [posts, setPosts] = useState([
@@ -94,9 +95,9 @@ const Forum = () => {
             placeholder="Write a new post..."
             className={styles.newPostInput}
           />
-          <button onClick={handlePostSubmit} className={styles.postButton}>
+          <StandardButton onClick={handlePostSubmit}>
             Post
-          </button>
+          </StandardButton>
         </div>
       </main>
     </div>

@@ -31,10 +31,9 @@ const Header = () => {
         <img className={styles.logoImage} src="/logo.svg" alt="Logo" />
         <nav className={styles.navbar}>
           <NavItem href="/" text="ABOUT US" />
-          <NavItem href="/process-map" text="PROCESS MAP" />
-          <NavItem href="/forum" text="FORUM" />
-          <NavItem href="/vendors" text="VENDORS" />
           <NavItem href="/project-management" text="WORKFLOW" />
+          <NavItem href="/vendors" text="VENDORS" />
+          <NavItem href="/forum" text="FORUM" />
         </nav>
       </div>
       {isLoading ? (

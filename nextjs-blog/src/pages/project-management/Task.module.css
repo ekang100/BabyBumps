@@ -1,0 +1,181 @@
+.taskContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.taskHeader {
+  align-self: stretch;
+  padding: 8px 12px 4px 12px; /* Matches the original padding */
+  background: #E65D71;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.taskTitle {
+  flex: 1 1 0;
+  color: white;
+  font-size: 17.5px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  line-height: 26.25px;
+  word-wrap: break-word;
+}
+
+.taskBody {
+  align-self: stretch;
+  padding: 6px 12px; /* Matches the original padding */
+  background: white;
+  border: 1px solid #E65D71;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.taskDescription {
+  align-self: stretch;
+  color: rgba(0, 0, 0, 0.75);
+  font-size: 14px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  line-height: 21px;
+  word-wrap: break-word;
+}
+
+.taskFooter {
+  padding-top: 6px; /* Added padding to match the original reference */
+  padding-bottom: 6px; /* Added padding to match the original reference */
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.taskIconContainer {
+  padding: 5px 8px; /* Matches the original padding */
+  border-radius: 5px;
+  border: 1px solid #D1D5DB;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  transition: border-color 0.2s ease;
+}
+
+.taskIconContainer:hover {
+  border-color: #7995E8;
+}
+
+.taskIcon {
+  width: 14px;
+  height: 14px;
+  color: #333; /* Adjust color as needed */
+}
+
+.taskStatusIndicator {
+  width: 8px;
+  height: 8px;
+  background: #7995E8;
+  border-radius: 9999px;
+}
+
+/* Pop-up Overlay */
+.popupOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.30); /* Semi-transparent background */
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Above other elements */
+}
+
+/* Pop-up Content */
+.popupContent {
+  width: 100%;
+  max-width: 600px;
+  padding: 12px 24px 24px 24px;
+  background: rgba(255, 255, 255, 0.90);
+  border: 1px black solid;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-end;
+  gap: 24px;
+}
+
+/* Pop-up Header */
+.popupHeader {
+  align-self: stretch;
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center; 
+  gap: 8px;
+  text-align: center;
+  color: black;
+  font-size: 17.5px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 500;
+  line-height: 26.25px;
+  word-wrap: break-word;
+}
+
+/* Notes Textarea */
+.notesTextarea {
+  align-self: stretch;
+  flex: 1 1 0;
+  padding: 14px;
+  background: #FFFEF5;
+  border-radius: 9px;
+  border: 1px #E5E7EB solid;
+  resize: vertical;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  color: black;
+  min-height: 268px;
+  display: inline-flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* Save Button */
+.saveButton {
+  height: 38px;
+  padding: 10.5px 26px;
+  background: #FFFEF5;
+  border: 1px #D1D5DB solid;
+  border-radius: 9px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 7px;
+  cursor: pointer;
+  font-family: 'Inter', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #E65D71;
+  transition: background-color 0.3s;
+}
+
+.saveButton:hover {
+  background-color: #e0e0e0; /* Optional: Change background on hover for feedback */
+}

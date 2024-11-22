@@ -76,22 +76,6 @@
   font-size: 1.4rem;
 }
 
-.postButton {
-  align-self: center;
-  background-color: #FF6F61;
-  color: white;
-  padding: 20px 40px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-  font-size: 1.4rem;
-}
-
-.postButton:hover {
-  background-color: #FF4F41;
-}
-
 .footer {
   background-color: #FFFFFF;
   padding: 20px;

@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './Post.module.css';
+import StandardButton from '../../components/buttons/standardButton';
 
 const Post = ({ post, replyContent, setReplyContent, handleReplySubmit }) => (
   <div className={styles.postCard}>
@@ -20,7 +21,9 @@ const Post = ({ post, replyContent, setReplyContent, handleReplySubmit }) => (
         placeholder="Write a reply..."
         className={styles.replyInput}
       />
-      <button onClick={() => handleReplySubmit(post.id)} className={styles.replyButton}>Reply</button>
+      <StandardButton onClick={() => handleReplySubmit(post.id)}>
+        Reply
+      </StandardButton>
     </div>
   </div>
 );
